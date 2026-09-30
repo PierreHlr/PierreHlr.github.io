@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- VERSION ANGLAISE de projets/neural-speech.html -->
+  <title>Neural Speech (PokECE) — Pierre Hilaireau</title>
+  <meta name="description" content="Neural Speech: embedded speech recognition on an Arduino Due. Real-time acquisition, FIR filtering, MFCC and a 76,000-parameter neural network, in a 3D-printed Pokéball enclosure.">
+  <link rel="alternate" hreflang="fr" href="https://pierrehlr.github.io/projets/neural-speech.html">
+  <link rel="alternate" hreflang="en" href="https://pierrehlr.github.io/en/projects/neural-speech.html">
+
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#hobbies">Hobbies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="lang-switch" href="../../projets/neural-speech.html" hreflang="fr" lang="fr" title="Version française">FR</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="content">
+
+    <section class="project-header">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <p class="eyebrow">School project · Jan. — May 2026 · ECE Lyon</p>
+        <h1>Neural Speech</h1>
+        <p class="lead">
+          A “Pokédex” of the school's professors: say a name, and an Arduino Due recognizes
+          the word with a neural network running directly on the board.
+        </p>
+        <ul class="tags"><li>C/C++</li><li>Arduino Due</li><li>Signal processing</li><li>MFCC</li><li>CNN</li><li>PyTorch</li><li>KiCad</li></ul>
+
+        <div class="figure-row project-cover">
+          <figure>
+            <img src="../../assets/img/projets/neural-speech/pokece-rendu.jpg" width="860" height="860"
+                 alt="3D render of the Pokéball-shaped enclosure, engraved PokECE, on its stand">
+            <figcaption>The Pokéball enclosure of the PokECE demonstrator (3D render).</figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/img/projets/neural-speech/montage.jpg" width="1000" height="1000"
+                 alt="Breadboard setup: three LEDs with their resistors and the MAX9814 microphone module">
+            <figcaption>The setup: three result LEDs and the MAX9814 microphone.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <aside class="datasheet" aria-label="Datasheet">
+        <div class="datasheet-title"><span>Datasheet</span><span>Rev A</span></div>
+        <dl>
+          <dt>Period</dt>
+          <dd>January — May 2026</dd>
+          <dt>Context</dt>
+          <dd>3<sup>rd</sup>-year electronics project (embedded computing), ECE Lyon</dd>
+          <dt>Team</dt>
+          <dd>4 students</dd>
+          <dt>Target</dt>
+          <dd>Arduino Due (SAM3X8E, Cortex-M3 at 84&nbsp;MHz)</dd>
+          <dt>Sensor</dt>
+          <dd>MAX9814 microphone with automatic gain</dd>
+          <dt>Model</dt>
+          <dd>76,000-parameter CNN, 3 words, 2.2&nbsp;% error</dd>
+          <dt>Tools</dt>
+          <dd>C/C++, PlatformIO, Python, PyTorch, KiCad</dd>
+        </dl>
+      </aside>
+
+      <article class="prose">
+
+        <h2>The project</h2>
+        <p>
+          Neural Speech is the 3<sup>rd</sup>-year electronics project, carried out by a team of four.
+          The goal: recognize spoken words entirely on an Arduino Due, from the microphone acquisition
+          to the neural network classification. The PC is only used to prepare the data, train
+          the model offline and display the result.
+        </p>
+        <p>
+          Our use case, <strong>PokECE</strong>, turns it into a Pokédex of the school's professors:
+          the user says a professor's name, the board recognizes the word, lights up the matching LED
+          and sends the result to a PC interface that displays the professor's “card”.
+          Everything fits in a 3D-printed, Pokéball-shaped enclosure.
+        </p>
+
+        <h2>Processing chain</h2>
+        <p>
+          The sound picked up by the microphone goes through eight stages, all computed in real time
+          on the Arduino Due:
+        </p>
+        <ol class="chain">
+          <li><strong>Microphone</strong><span>MAX9814 on input A0, biased at mid-supply</span></li>
+          <li><strong>12-bit ADC</strong><span>≈ 32 kHz, triggered by timer TC0</span></li>
+          <li><strong>FIR filter</strong><span>31 taps, 3.4 kHz low-pass</span></li>
+          <li><strong>Decimation</strong><span>One sample out of 4, i.e. ≈ 8 kHz</span></li>
+          <li><strong>Frames</strong><span>256 samples, 50 % overlap</span></li>
+          <li><strong>Spectrum</strong><span>Pre-emphasis, Hamming window, 256-point FFT</span></li>
+          <li><strong>MFCC</strong><span>26 Mel filters, log, DCT: 13 coefficients</span></li>
+          <li><strong>CNN</strong><span>Recognizes the word, lights up the matching LED</span></li>
+        </ol>
+        <p>
+          Each second of speech thus becomes a matrix of 62 frames × 13 MFCC coefficients,
+          describing the timbre of the signal over time:
+        </p>
+        <figure>
+          <img src="../../assets/img/projets/neural-speech/mfcc.jpg" width="1400" height="735" loading="lazy"
+               alt="Heat map of the 13 MFCC coefficients over one second">
+          <figcaption>The 13 MFCCs computed by the board, frame by frame, over one second of signal.</figcaption>
+        </figure>
+
+        <h2>Real-time filtering</h2>
+        <p>
+          The FIR filter works in fixed point (Q12 format) on a circular buffer: for each new sample,
+          it computes a 31-product convolution, then decimation keeps only one sample out of four.
+          Measured on the board, this processing takes 12&nbsp;µs per sample, while the budget
+          between two samples is 31&nbsp;µs.
+        </p>
+        <figure>
+<pre><code><span class="c-comment">// FIR filter on a circular buffer, then decimation by 4</span>
+<span class="c-keyword">bool</span> processStreamingSample(uint16_t adcValue, uint16_t &amp;decimatedSample) {
+  <span class="c-keyword">const</span> int16_t centered = <span class="c-keyword">static_cast</span>&lt;int16_t&gt;(adcValue) - ADC_CENTER;
+  firRingBuffer[firWriteIndex] = centered;
+
+  int32_t accumulator = 0;
+  size_t readIndex = firWriteIndex;
+  <span class="c-keyword">for</span> (size_t tap = 0; tap &lt; FIR_TAP_COUNT; ++tap) {
+    accumulator += <span class="c-keyword">static_cast</span>&lt;int32_t&gt;(firCoefficients[tap]) *
+                   <span class="c-keyword">static_cast</span>&lt;int32_t&gt;(firRingBuffer[readIndex]);
+    readIndex = (readIndex == 0) ? FIR_TAP_COUNT - 1 : readIndex - 1;
+  }
+  firWriteIndex = (firWriteIndex + 1) % FIR_TAP_COUNT;
+
+  <span class="c-comment">// One output sample every 4 input samples</span>
+  <span class="c-keyword">if</span> ((++inputSampleCount % DECIMATION_FACTOR) != 0) <span class="c-keyword">return false</span>;
+  <span class="c-comment">// … Q12 scaling and writing decimatedSample</span>
+  <span class="c-keyword">return true</span>;
+}</code></pre>
+          <figcaption>Simplified excerpt from <code>src/ET3.cpp</code> (comments translated).</figcaption>
+        </figure>
+
+        <h2>Embedded neural network</h2>
+        <p>
+          The network is trained on a PC with PyTorch, on a dataset of 314 recordings built by the team.
+          Its weights are then exported to a self-contained C header, which also holds the
+          standardization parameters and the inference code run by the Arduino:
+        </p>
+<pre><code>Input 62×13 MFCC
+ → Conv 5×3, 8 filters, ReLU  → MaxPool 2×1   (31×13×8)
+ → Conv 3×3, 12 filters, ReLU → MaxPool 2×1   (15×13×12)
+ → Dense 2340 → 32, ReLU
+ → Dense 32 → 3, softmax</code></pre>
+        <figure>
+          <img src="../../assets/img/projets/neural-speech/entrainement-cnn.jpg" width="1400" height="780" loading="lazy"
+               alt="Training and test mean squared error curves, dropping within a few epochs">
+          <figcaption>Mean squared error while training the final CNN (training and test).</figcaption>
+        </figure>
+        <p>
+          Before inference, a level check (RMS and peak) discards captures that are too quiet:
+          the system then answers “Unknown” rather than guessing.
+        </p>
+
+        <h2>Advanced features</h2>
+        <ul>
+          <li>
+            <strong>Three words instead of two.</strong> The specification required recognizing
+            at least two. With three words, the error even dropped from 3.3&nbsp;% (2 out of 60)
+            to 2.2&nbsp;% (2 out of 90).
+          </li>
+          <li>
+            <strong>Voice-triggered recording.</strong> With the button, pressing and speaking had to be
+            synchronized. The board now listens continuously: it compares the average signal level,
+            over windows of about 10&nbsp;ms, to a threshold that adapts to the background noise,
+            and only triggers after several consecutive windows above the threshold. A 150&nbsp;ms
+            pre-roll buffer avoids cutting off the beginning of the word.
+          </li>
+        </ul>
+
+        <h2>Tests and results</h2>
+        <p>
+          The project is built in successive stages, each one validated by a test on the board
+          before moving on to the next:
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Stage</th><th>Target</th><th>Measured</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sampling</td><td class="num">≈ 32 kHz</td><td class="num ok">31,987.81 Hz</td></tr>
+              <tr><td>Anti-aliasing filter</td><td class="num">≥ 30 dB from 4 kHz</td><td class="num ok">−34.96 dB at 4 kHz<br>−88.92 dB at 8 kHz</td></tr>
+              <tr><td>Filtering time</td><td class="num">&lt; 31 µs</td><td class="num ok">12 µs</td></tr>
+              <tr><td>Framing</td><td class="num">256, 50 % overlap</td><td class="num ok">62 frames, no errors</td></tr>
+              <tr><td>Training (test MSE)</td><td class="num">&lt; 0.05</td><td class="num ok">3.3 × 10<sup>−4</sup></td></tr>
+              <tr><td>Dataset</td><td class="num">≥ 100 items</td><td class="num ok">314 captures</td></tr>
+              <tr><td>Classification</td><td class="num">&lt; 10 % error</td><td class="num ok">2.2 % (2 out of 90)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure>
+          <img src="../../assets/img/projets/neural-speech/oscilloscope-1khz.jpg" width="1400" height="1050" loading="lazy"
+               alt="Oscilloscope: a 1 kHz sine wave in yellow and its sampled, staircase-shaped version in purple">
+          <figcaption>First stage: a 1 kHz sine wave at the input (yellow) and the sampled signal played back by the DAC (purple).</figcaption>
+        </figure>
+
+        <h2>Hardware and enclosure</h2>
+        <ul>
+          <li>Arduino Due, required by the specification;</li>
+          <li>MAX9814 microphone module, with an automatic-gain preamplifier, on input A0;</li>
+          <li>three result LEDs protected by 220&nbsp;Ω resistors;</li>
+          <li>a push button to start a manual acquisition;</li>
+          <li>a schematic drawn in KiCad;</li>
+          <li>a 3D-printed, Pokéball-shaped enclosure.</li>
+        </ul>
+        <figure>
+          <img src="../../assets/img/projets/neural-speech/impression-3d.jpg" width="1200" height="626" loading="lazy"
+               alt="A white half-shell of the Pokéball being printed on a 3D printer">
+          <figcaption>Printing one half-shell of the enclosure.</figcaption>
+        </figure>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projects">← Back to projects</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Handmade · hosted on GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

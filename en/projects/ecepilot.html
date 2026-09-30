@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- VERSION ANGLAISE de projets/ecepilot.html -->
+  <title>ECEPilot — Pierre Hilaireau</title>
+  <meta name="description" content="ECEPilot: a Wi-Fi-controlled rover with 360° LiDAR perception, three microcontrollers and a remote control on a PCB designed in KiCad.">
+  <link rel="alternate" hreflang="fr" href="https://pierrehlr.github.io/projets/ecepilot.html">
+  <link rel="alternate" hreflang="en" href="https://pierrehlr.github.io/en/projects/ecepilot.html">
+
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#hobbies">Hobbies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="lang-switch" href="../../projets/ecepilot.html" hreflang="fr" lang="fr" title="Version française">FR</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="content">
+
+    <section class="project-header">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <p class="eyebrow">Project · Since Sept. 2026 · Paris</p>
+        <h1>ECEPilot</h1>
+        <p class="lead">
+          A Wi-Fi-controlled rover that perceives its surroundings with a 360° LiDAR.
+          The system relies on three microcontrollers and a remote control built on a PCB
+          designed in KiCad.
+        </p>
+        <ul class="tags"><li>C/C++</li><li>Python</li><li>ATmega328P</li><li>ESP32</li><li>ESP01S</li><li>KiCad</li><li>ROS2</li></ul>
+
+        <figure class="project-cover">
+          <img src="../../assets/img/projets/ecepilot/illustration.svg" width="960" height="600"
+               alt="Illustration: the rover seen from above in the middle of a room, with its LiDAR beams and the detected obstacle points">
+        </figure>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <aside class="datasheet" aria-label="Datasheet">
+        <div class="datasheet-title"><span>Datasheet</span><span>In progress</span></div>
+        <dl>
+          <dt>Period</dt>
+          <dd>Since September 2026</dd>
+          <dt>Location</dt>
+          <dd>Paris</dd>
+          <dt>Microcontrollers</dt>
+          <dd>ATmega328P, ESP32, ESP01S</dd>
+          <dt>Sensor</dt>
+          <dd>360° LiDAR</dd>
+          <dt>Languages</dt>
+          <dd>C/C++, Python</dd>
+          <dt>Tools</dt>
+          <dd>KiCad (single-sided PCB), ROS2</dd>
+        </dl>
+      </aside>
+
+      <article class="prose">
+
+        <h2>The project</h2>
+        <p>
+          ECEPilot is a rover that can be driven remotely over Wi-Fi. A 360° LiDAR lets it perceive
+          its surroundings, and an emergency stop can halt it at any time.
+        </p>
+
+        <h2>Architecture</h2>
+        <p>
+          The embedded system relies on three microcontrollers: an ATmega328P, an ESP32 and an ESP01S.
+          The software side is built on ROS2.
+        </p>
+
+        <h2>The remote control</h2>
+        <p>
+          The remote control is a single-sided printed circuit board designed in KiCad. It combines
+          a joystick, buttons, an OLED screen, a buzzer and an RGB LED.
+        </p>
+
+        <h2>Progress</h2>
+        <p>The project has been under way since September 2026: this page will be updated as it progresses.</p>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projects">← Back to projects</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Handmade · hosted on GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,57 +1,53 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Titre et description : visibles dans Google et les partages LinkedIn -->
-  <title>Pierre Hilaireau — Électronique &amp; systèmes embarqués</title>
-  <meta name="description" content="Portfolio de Pierre Hilaireau, étudiant ingénieur en systèmes embarqués : conception de cartes électroniques, firmware, traitement du signal et projets réalisés.">
-  <meta property="og:title" content="Pierre Hilaireau — Portfolio électronique">
-  <meta property="og:description" content="Projets en électronique, systèmes embarqués et traitement du signal.">
+  <!-- VERSION ANGLAISE de index.html : pense à répercuter ici les modifications de la version française -->
+  <title>Pierre Hilaireau — Electronics &amp; Embedded Systems</title>
+  <meta name="description" content="Portfolio of Pierre Hilaireau, engineering student in embedded systems: electronic board design, firmware, signal processing and projects.">
+  <meta property="og:title" content="Pierre Hilaireau — Electronics Portfolio">
+  <meta property="og:description" content="Projects in electronics, embedded systems and signal processing.">
   <meta property="og:type" content="website">
-  <!-- Image d'aperçu pour les partages (1200×630 px). Décommente quand tu l'as ajoutée :
-  <meta property="og:image" content="https://pierrehlr.github.io/assets/img/apercu.jpg"> -->
   <link rel="alternate" hreflang="fr" href="https://pierrehlr.github.io/">
   <link rel="alternate" hreflang="en" href="https://pierrehlr.github.io/en/">
 
-
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 
   <script>
-    // Applique le thème mémorisé avant l'affichage (évite un flash de couleur)
     try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
-  <script src="js/main.js" defer></script>
+  <script src="../js/main.js" defer></script>
 </head>
 
 <body>
-  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <a class="skip-link" href="#content">Skip to content</a>
 
   <!-- ===================== MENU ===================== -->
   <header class="nav">
     <div class="container nav-inner">
       <a class="nav-brand" href="#top">Pierre Hilaireau</a>
-      <nav class="nav-links" aria-label="Navigation principale">
-        <a href="#projets">Projets</a>
-        <a href="#competences">Compétences</a>
-        <a href="#parcours">Parcours</a>
-        <a href="#loisirs">Loisirs</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#background">Background</a>
+        <a href="#hobbies">Hobbies</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a class="lang-switch" href="en/index.html" hreflang="en" lang="en" title="English version">EN</a>
-      <button class="theme-toggle" type="button" aria-label="Basculer entre thème clair et sombre">
+      <a class="lang-switch" href="../index.html" hreflang="fr" lang="fr" title="Version française">FR</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme">
         <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
         <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
       </button>
     </div>
   </header>
 
-  <main id="contenu">
+  <main id="content">
 
     <!-- ===================== ACCUEIL ===================== -->
     <section class="hero" id="top">
@@ -59,13 +55,13 @@
         <div class="hero-text">
           <span class="rule" aria-hidden="true"></span>
           <h1 class="poster-title">
-            <span class="t-heavy">Portfolio</span>
-            <span class="t-heavy">d'électronique</span>
-            <span class="t-light">embarquée</span>
+            <span class="t-heavy">Embedded</span>
+            <span class="t-heavy">electronics</span>
+            <span class="t-light">portfolio</span>
           </h1>
           <p class="lead">
-            Je conçois des cartes électroniques et le firmware qui les fait fonctionner,
-            du schéma jusqu'aux mesures.
+            I design electronic boards and the firmware that brings them to life,
+            from schematic to measurements.
           </p>
 
           <!-- Prénom en art ASCII animé (dessiné par js/main.js à partir de data-ascii) -->
@@ -74,16 +70,15 @@
           </div>
 
           <span class="rule" aria-hidden="true"></span>
-          <p class="hero-date">Étudiant en M1 Systèmes embarqués à l'ECE Paris</p>
-          <p class="hero-info">Électronique embarquée<br>Instrumentation · Signal</p>
+          <p class="hero-date">Master's student in Embedded Systems at ECE Paris</p>
+          <p class="hero-info">Embedded electronics<br>Instrumentation · Signal</p>
           <span class="rule" aria-hidden="true"></span>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projets">Voir mes projets
+            <a class="btn btn-primary" href="#projects">See my projects
               <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M24.6 16.6 17 24.2V4h-2v20.2l-7.6-7.6L6 18l10 10 10-10z"/></svg>
             </a>
-            <!-- Dépose ton CV dans assets/cv/ sous le nom CV.pdf -->
-            <a class="btn" href="assets/cv/CV.pdf" target="_blank" rel="noopener">Mon CV (PDF)
+            <a class="btn" href="../assets/cv/CV.pdf" target="_blank" rel="noopener">My CV (PDF, in French)
               <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 24v4H6v-4H4v4a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-4zM26 14l-1.4-1.4-7.6 7.6V2h-2v18.2l-7.6-7.6L6 14l10 10z"/></svg>
             </a>
           </div>
@@ -212,65 +207,60 @@
       </div>
     </section>
 
-    <!-- ===================== PROJETS ===================== -->
-    <section class="section" id="projets">
+    <!-- ===================== PROJECTS ===================== -->
+    <section class="section" id="projects">
       <div class="container">
         <div class="section-head">
           <span class="section-num">01</span>
-          <h2>Projets</h2>
+          <h2>Projects</h2>
           <span class="pixel" data-pose="loupe" aria-hidden="true"></span>
         </div>
         <p class="section-intro">
-          Une sélection de projets que j'ai conçus et réalisés, de la carte au code.
-          Chaque fiche détaille la démarche, les choix techniques et les mesures obtenues.
+          A selection of projects I designed and built, from board to code.
+          Each page covers the approach, the technical choices and the measured results.
         </p>
 
-        <!--
-          POUR AJOUTER UN PROJET : copie un bloc <a class="card"> … </a> ci-dessous,
-          change le lien (href), l'image, le titre, la description et les tags.
-          Mets ton meilleur projet en premier.
-        -->
         <div class="cards">
 
-          <a class="card" href="projets/ecepilot.html">
+          <a class="card" href="projects/ecepilot.html">
             <div class="card-img">
-              <img src="assets/img/projets/ecepilot/illustration.svg" width="960" height="600" loading="lazy"
-                   alt="Illustration du rover ECEPilot vu de dessus, avec les rayons de son LiDAR">
+              <img src="../assets/img/projets/ecepilot/illustration.svg" width="960" height="600" loading="lazy"
+                   alt="Illustration of the ECEPilot rover seen from above, with its LiDAR beams">
             </div>
             <div class="card-body">
-              <p class="card-meta">Depuis sept. 2026 · Paris</p>
+              <p class="card-meta">Since Sept. 2026 · Paris</p>
               <h3>ECEPilot</h3>
-              <p>Robot rover piloté en Wi-Fi avec perception LiDAR 360° : trois microcontrôleurs et une télécommande sur PCB conçu sous KiCad.</p>
+              <p>Wi-Fi-controlled rover with 360° LiDAR perception: three microcontrollers and a remote control on a PCB designed in KiCad.</p>
               <ul class="tags"><li>ATmega328P</li><li>ESP32</li><li>KiCad</li><li>ROS2</li></ul>
-              <span class="card-more">Voir le projet <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
+              <span class="card-more">View project <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
             </div>
           </a>
 
-          <a class="card" href="projets/neural-speech.html">
+          <a class="card" href="projects/neural-speech.html">
             <div class="card-img">
-              <img src="assets/img/projets/neural-speech/vignette.jpg" width="960" height="600" loading="lazy"
-                   alt="Rendu 3D du boîtier Pokéball gravé PokECE">
+              <img src="../assets/img/projets/neural-speech/vignette.jpg" width="960" height="600" loading="lazy"
+                   alt="3D render of the Pokéball enclosure engraved PokECE">
             </div>
             <div class="card-body">
-              <p class="card-meta">Janv. — mai 2026 · ECE Lyon</p>
+              <p class="card-meta">Jan. — May 2026 · ECE Lyon</p>
               <h3>Neural Speech</h3>
-              <p>Reconnaissance vocale embarquée : un « Pokédex » qui reconnaît le mot prononcé grâce à un réseau de neurones exécuté sur un Arduino Due.</p>
+              <p>Embedded speech recognition: a “Pokédex” that recognizes the spoken word with a neural network running on an Arduino Due.</p>
               <ul class="tags"><li>C/C++</li><li>Arduino Due</li><li>MFCC</li><li>CNN</li></ul>
-              <span class="card-more">Voir le projet <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
+              <span class="card-more">View project <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
             </div>
           </a>
 
-          <a class="card" href="projets/double-pendule.html">
+          <a class="card" href="projects/double-pendulum.html">
             <div class="card-img">
-              <img src="assets/img/projets/double-pendule/vignette.jpg" width="960" height="600" loading="lazy"
-                   alt="Deux doubles pendules partis presque du même point, dont les trajectoires divergent">
+              <img src="../assets/img/projets/double-pendule/vignette.jpg" width="960" height="600" loading="lazy"
+                   alt="Two double pendulums released from almost the same position, whose trajectories diverge">
             </div>
             <div class="card-body">
-              <p class="card-meta">2024 · Projet personnel</p>
-              <h3>Double pendule interactif</h3>
-              <p>Simulateur en Python : intégration Runge-Kutta 4, carte du chaos par exposant de Lyapunov et recherche de mouvements périodiques.</p>
+              <p class="card-meta">2024 · Personal project</p>
+              <h3>Interactive double pendulum</h3>
+              <p>Python simulator: Runge-Kutta 4 integration, chaos map based on the Lyapunov exponent and search for periodic motions.</p>
               <ul class="tags"><li>Python</li><li>NumPy</li><li>Runge-Kutta 4</li></ul>
-              <span class="card-more">Voir le projet <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
+              <span class="card-more">View project <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
             </div>
           </a>
 
@@ -278,134 +268,132 @@
       </div>
     </section>
 
-    <!-- ===================== COMPÉTENCES ===================== -->
-    <!-- Sous chaque outil : CE QUE tu en as fait (plus parlant qu'un niveau) -->
-    <section class="section" id="competences">
+    <!-- ===================== SKILLS ===================== -->
+    <section class="section" id="skills">
       <div class="container">
         <div class="section-head">
           <span class="section-num">02</span>
-          <h2>Compétences</h2>
+          <h2>Skills</h2>
           <span class="pixel" data-pose="multimetre" aria-hidden="true"></span>
         </div>
-        <p class="section-intro">Les langages et outils que j'utilise, avec le contexte dans lequel je les ai pratiqués.</p>
+        <p class="section-intro">The languages and tools I use, and the context in which I used them.</p>
 
         <div class="skills">
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="8" width="16" height="16"/><path d="M12 8V4M16 8V4M20 8V4M12 28v-4M16 28v-4M20 28v-4M8 12H4M8 16H4M8 20H4M28 12h-4M28 16h-4M28 20h-4"/><rect x="11" y="11" width="4" height="4"/><rect x="17" y="11" width="4" height="4"/><rect x="11" y="17" width="4" height="4"/><rect x="17" y="17" width="4" height="4"/></svg>
-            <h3>Électronique numérique &amp; FPGA</h3>
+            <h3>Digital electronics &amp; FPGA</h3>
             <ul>
-              <li>VHDL · SystemVerilog<span>Description de circuits numériques</span></li>
-              <li>Quartus<span>Synthèse et implémentation sur FPGA</span></li>
-              <li>Circuits numériques<span>Cours FPGA (ECE) et Digital Circuit (Ajou University)</span></li>
+              <li>VHDL · SystemVerilog<span>Digital circuit description</span></li>
+              <li>Quartus<span>FPGA synthesis and implementation</span></li>
+              <li>Digital circuits<span>FPGA course (ECE) and Digital Circuit course (Ajou University)</span></li>
             </ul>
           </div>
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="18"/><path d="M3 14h26" stroke-dasharray="1 2"/><path d="M5 14c2.5-7 5-7 7 0s4.5 7 7 0 4.5-7 7-2"/><path d="M12 23v4M20 23v4M8 27h16"/></svg>
-            <h3>Embarqué &amp; signal</h3>
+            <h3>Embedded &amp; signal</h3>
             <ul>
-              <li>C / C++<span>Firmware sur Arduino Due (Cortex-M3), ATmega328P et ESP32</span></li>
-              <li>Assembleur · MPLAB X<span>Programmation bas niveau de microcontrôleurs</span></li>
-              <li>Traitement du signal<span>Acquisition ADC par interruptions et filtre RIF en temps réel</span></li>
+              <li>C / C++<span>Firmware on Arduino Due (Cortex-M3), ATmega328P and ESP32</span></li>
+              <li>Assembly · MPLAB X<span>Low-level microcontroller programming</span></li>
+              <li>Signal processing<span>Interrupt-driven ADC sampling and real-time FIR filtering</span></li>
             </ul>
           </div>
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l12 7v12l-12 7-12-7V10z"/><path d="M4 10l12 7 12-7M16 17v12"/><path d="M10 13.5v7M22 13.5v7" stroke-dasharray="1 2"/></svg>
-            <h3>Conception &amp; CAO</h3>
+            <h3>Design &amp; CAD</h3>
             <ul>
-              <li>KiCad<span>PCB de la télécommande du robot ECEPilot</span></li>
-              <li>Proteus<span>Simulation de circuits</span></li>
-              <li>Shapr3D<span>Modélisation 3D</span></li>
+              <li>KiCad<span>PCB for the ECEPilot robot's remote control</span></li>
+              <li>Proteus<span>Circuit simulation</span></li>
+              <li>Shapr3D<span>3D modeling</span></li>
             </ul>
           </div>
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="22"/><path d="M3 10h26"/><path d="M5.5 7.5h1M8.5 7.5h1"/><path d="M8 15l4 3.5L8 22M15 22h8"/></svg>
-            <h3>Programmation &amp; outils</h3>
+            <h3>Programming &amp; tools</h3>
             <ul>
-              <li>Python<span>Modélisation de données, simulation numérique, entraînement d'un CNN</span></li>
-              <li>ROS2 · Linux embarqué<span>Robot ECEPilot, cours de Linux embarqué</span></li>
-              <li>Java · LaTeX<span>Programmation objet, rédaction technique sur Overleaf</span></li>
+              <li>Python<span>Data modeling, numerical simulation, CNN training</span></li>
+              <li>ROS2 · Embedded Linux<span>ECEPilot robot, embedded Linux course</span></li>
+              <li>Java · LaTeX<span>Object-oriented programming, technical writing on Overleaf</span></li>
             </ul>
           </div>
         </div>
 
         <p class="languages">
-          <strong>Langues :</strong> français (natif) · allemand (bilingue, Abitur) ·
-          anglais (professionnel, TOEIC 825/990) · coréen (débutant)
+          <strong>Languages:</strong> French (native) · German (bilingual, Abitur) ·
+          English (professional, TOEIC 825/990) · Korean (beginner)
         </p>
       </div>
     </section>
 
-    <!-- ===================== PARCOURS ===================== -->
-    <section class="section" id="parcours">
+    <!-- ===================== BACKGROUND ===================== -->
+    <section class="section" id="background">
       <div class="container">
         <div class="section-head">
           <span class="section-num">03</span>
-          <h2>Parcours</h2>
+          <h2>Background</h2>
           <span class="pixel" data-pose="diplome" aria-hidden="true"></span>
         </div>
 
-        <!-- À MODIFIER si tu veux : ajoute une phrase sur ce qui t'attire dans l'électronique -->
         <p class="about">
-          Étudiant en M1 Systèmes embarqués à l'ECE, je m'intéresse à l'électronique embarquée,
-          à l'instrumentation et au traitement du signal.
+          A Master's student in Embedded Systems at ECE, I'm interested in embedded electronics,
+          instrumentation and signal processing.
         </p>
 
         <div class="timeline-cols">
           <div>
-            <h3 class="col-title">Formation</h3>
+            <h3 class="col-title">Education</h3>
             <ol class="timeline">
               <li>
-                <span class="timeline-date">Sept. 2023 — aujourd'hui</span>
-                <h4>Cycle ingénieur, M1 Systèmes embarqués</h4>
-                <p class="timeline-place">ECE École d'ingénieurs, Paris · Programme Grande École</p>
-                <p>Électronique fondamentale, FPGA, microcontrôleurs, calcul embarqué, Linux embarqué,
-                  traitement du signal, électromagnétisme, programmation C/C++ et Python.
-                  Classé 1<sup>er</sup> sur 104 étudiants en 2025-2026.</p>
+                <span class="timeline-date">Sept. 2023 — present</span>
+                <h4>Engineering degree, first year of Master's in Embedded Systems</h4>
+                <p class="timeline-place">ECE Engineering School, Paris · Grande École programme</p>
+                <p>Fundamental electronics, FPGA, microcontrollers, embedded computing, embedded Linux,
+                  signal processing, electromagnetism, C/C++ and Python programming.
+                  Ranked 1<sup>st</sup> out of 104 students in 2025–2026.</p>
               </li>
               <li>
-                <span class="timeline-date">Sept. — déc. 2025</span>
-                <h4>Semestre de mobilité internationale</h4>
-                <p class="timeline-place">Ajou University, Suwon (Corée du Sud)</p>
-                <p>Algorithmique, circuits numériques, IT English, AI for Business.</p>
+                <span class="timeline-date">Sept. — Dec. 2025</span>
+                <h4>International exchange semester</h4>
+                <p class="timeline-place">Ajou University, Suwon (South Korea)</p>
+                <p>Algorithms, digital circuits, IT English, AI for Business.</p>
               </li>
               <li>
                 <span class="timeline-date">2020 — 2023</span>
-                <h4>Abitur (mention très bien) et baccalauréat (mention bien)</h4>
+                <h4>Abitur (highest honours) and French baccalauréat (with honours)</h4>
                 <p class="timeline-place">Lycée Saint-Sigisbert, Nancy</p>
-                <p>Double diplôme franco-allemand, spécialités mathématiques et physique-chimie.</p>
+                <p>French-German dual diploma, majoring in mathematics and physics-chemistry.</p>
               </li>
             </ol>
           </div>
           <div>
-            <h3 class="col-title">Expériences &amp; engagements</h3>
+            <h3 class="col-title">Experience &amp; involvement</h3>
             <ol class="timeline">
               <li>
-                <span class="timeline-date">Juin — juil. 2026</span>
-                <h4>Stage, outils Python pour l'ingénierie</h4>
-                <p class="timeline-place">SFE Process, Tomblaine · procédés hautes pressions et CO<sub>2</sub> supercritique</p>
-                <p>Outil de modélisation de données expérimentales (régressions linéaires et exponentielles)
-                  pour identifier les régimes de solubilité, d'interaction et de diffusion d'un procédé
-                  au CO<sub>2</sub> supercritique.</p>
+                <span class="timeline-date">June — July 2026</span>
+                <h4>Internship, Python tools for engineering</h4>
+                <p class="timeline-place">SFE Process, Tomblaine · high-pressure processes and supercritical CO<sub>2</sub></p>
+                <p>A tool for modeling experimental data (linear and exponential regressions)
+                  to identify the solubility, interaction and diffusion regimes of a supercritical
+                  CO<sub>2</sub> process.</p>
               </li>
               <li>
-                <span class="timeline-date">Janv. — févr. 2025</span>
-                <h4>Stage ouvrier</h4>
-                <p class="timeline-place">SODEL Électricité, Nancy · installations courant fort et faible</p>
-                <p>Câblage, raccordement, contrôle et maintenance d'installations électriques.</p>
+                <span class="timeline-date">Jan. — Feb. 2025</span>
+                <h4>Hands-on internship</h4>
+                <p class="timeline-place">SODEL Électricité, Nancy · power and low-voltage electrical installations</p>
+                <p>Wiring, connection, testing and maintenance of electrical installations.</p>
               </li>
               <li>
-                <span class="timeline-date">Févr. 2026 — aujourd'hui</span>
-                <h4>Vice-président de l'EQCE</h4>
-                <p class="timeline-place">Association de mathématiques et d'informatique quantique de l'ECE, Paris</p>
-                <p>Organisation d'événements scientifiques, conception et pilotage d'un parcours de 20 heures
-                  reliant les fondamentaux mathématiques à l'informatique quantique.</p>
+                <span class="timeline-date">Feb. 2026 — present</span>
+                <h4>Vice-president of EQCE</h4>
+                <p class="timeline-place">ECE's mathematics and quantum computing student association, Paris</p>
+                <p>Organizing scientific events; designing and running a 20-hour course
+                  linking mathematical fundamentals to quantum computing.</p>
               </li>
               <li>
-                <span class="timeline-date">Janv. 2025 — juin 2026</span>
-                <h4>Tuteur en mathématiques, physique et électronique</h4>
-                <p class="timeline-place">ECE Association de Tutorat, Lyon</p>
-                <p>Accompagnement individuel d'étudiants, avec des explications adaptées à leur niveau ;
-                  préparation et animation de séances collectives.</p>
+                <span class="timeline-date">Jan. 2025 — June 2026</span>
+                <h4>Tutor in mathematics, physics and electronics</h4>
+                <p class="timeline-place">ECE Tutoring Association, Lyon</p>
+                <p>One-to-one support for students, with explanations adapted to their level;
+                  preparing and leading group sessions.</p>
               </li>
             </ol>
           </div>
@@ -413,80 +401,79 @@
       </div>
     </section>
 
-    <!-- ===================== LOISIRS ===================== -->
-    <section class="section" id="loisirs">
+    <!-- ===================== HOBBIES ===================== -->
+    <section class="section" id="hobbies">
       <div class="container">
         <div class="section-head">
           <span class="section-num">04</span>
-          <h2>Loisirs</h2>
+          <h2>Hobbies</h2>
           <span class="pixel" data-pose="judo" aria-hidden="true"></span>
         </div>
-        <p class="section-intro">Ce qui m'occupe en dehors de l'électronique.</p>
+        <p class="section-intro">What keeps me busy outside electronics.</p>
 
         <div class="skills">
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 4L4 8l2.5 8 3-1.2V28h13V14.8l3 1.2L28 8l-7-4"/><path d="M11 4l5 10 5-10M16 14v5"/><path d="M9.5 19h13v3h-13z"/><path d="M15 22l-2 5M17 22l2 5"/></svg>
             <h3>Judo</h3>
             <ul>
-              <li>Ceinture noire<span>1<sup>er</sup> dan</span></li>
-              <li>Compétition<span>Niveau national</span></li>
+              <li>Black belt<span>1<sup>st</sup> dan</span></li>
+              <li>Competition<span>National level</span></li>
             </ul>
           </div>
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 17L21 7l2.5 4L7.5 21z"/><path d="M15 15.5L10 28M15 15.5L20 28M15 15.5V28"/><path d="M27 3v5M24.5 5.5h5"/></svg>
-            <h3>Astrophotographie</h3>
+            <h3>Astrophotography</h3>
             <p class="hobby-text">
-              Empiler de nombreuses poses pour faire ressortir un signal très faible du bruit du capteur :
-              du traitement du signal appliqué au ciel.
+              Stacking many exposures to pull a very faint signal out of the sensor noise:
+              signal processing applied to the night sky.
             </p>
             <ul>
-              <li>Monture EQ5 Pro<span>Équatoriale motorisée</span></li>
-              <li>Lunette BK 80ED<span>Lunette ED de 80 mm</span></li>
-              <li>Caméra ZWO ASI183 Pro<span>Caméra astronomique refroidie</span></li>
+              <li>EQ5 Pro mount<span>Motorized equatorial mount</span></li>
+              <li>BK 80ED refractor<span>80 mm ED refractor</span></li>
+              <li>ZWO ASI183 Pro camera<span>Cooled astronomy camera</span></li>
             </ul>
           </div>
           <div class="skill-group">
             <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="10" width="24" height="15"/><circle cx="16" cy="17.5" r="5"/><path d="M8 10V7h6v3M22 8h3"/></svg>
-            <h3>Photographie</h3>
+            <h3>Photography</h3>
             <ul>
-              <li>Fujifilm X-E5<span>Hybride APS-C</span></li>
+              <li>Fujifilm X-E5<span>APS-C mirrorless camera</span></li>
             </ul>
           </div>
         </div>
 
-        <!-- Images non recompressées : un clic ouvre l'original en pleine résolution -->
-        <h3 class="col-title sky-title">Quelques images du ciel</h3>
+        <h3 class="col-title sky-title">A few images of the sky</h3>
         <div class="sky-gallery">
           <figure>
-            <a href="assets/img/loisirs/astro-pleiades.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/loisirs/astro-pleiades.jpg" width="5320" height="3465" loading="lazy" decoding="async"
-                   alt="L'amas des Pléiades : des étoiles bleues entourées de leur nébuleuse de réflexion">
+            <a href="../assets/img/loisirs/astro-pleiades.jpg" target="_blank" rel="noopener">
+              <img src="../assets/img/loisirs/astro-pleiades.jpg" width="5320" height="3465" loading="lazy" decoding="async"
+                   alt="The Pleiades cluster: blue stars surrounded by their reflection nebula">
             </a>
-            <figcaption>Les Pléiades (M45)</figcaption>
+            <figcaption>The Pleiades (M45)</figcaption>
           </figure>
           <figure>
-            <a href="assets/img/loisirs/astro-cygne.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/loisirs/astro-cygne.jpg" width="3552" height="5374" loading="lazy" decoding="async"
-                   alt="Les Dentelles du Cygne : un filament de gaz vert et rouge qui traverse un champ d'étoiles">
+            <a href="../assets/img/loisirs/astro-cygne.jpg" target="_blank" rel="noopener">
+              <img src="../assets/img/loisirs/astro-cygne.jpg" width="3552" height="5374" loading="lazy" decoding="async"
+                   alt="The Western Veil Nebula: a green and red gas filament crossing a star field">
             </a>
-            <figcaption>Les Dentelles du Cygne (NGC 6960)</figcaption>
+            <figcaption>The Western Veil Nebula (NGC 6960)</figcaption>
           </figure>
           <figure>
-            <a href="assets/img/loisirs/astro-m82.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/loisirs/astro-m82.jpg" width="4875" height="2769" loading="lazy" decoding="async"
-                   alt="La galaxie du Cigare, allongée et au cœur rougeâtre, au milieu d'un champ d'étoiles">
+            <a href="../assets/img/loisirs/astro-m82.jpg" target="_blank" rel="noopener">
+              <img src="../assets/img/loisirs/astro-m82.jpg" width="4875" height="2769" loading="lazy" decoding="async"
+                   alt="The Cigar Galaxy, elongated with a reddish core, in a star field">
             </a>
-            <figcaption>La galaxie du Cigare (M82)</figcaption>
+            <figcaption>The Cigar Galaxy (M82)</figcaption>
           </figure>
           <figure>
-            <a href="assets/img/loisirs/astro-lune.jpg" target="_blank" rel="noopener">
-              <img src="assets/img/loisirs/astro-lune.jpg" width="1440" height="1800" loading="lazy" decoding="async"
-                   alt="La Lune gibbeuse en noir et blanc, avec ses cratères le long du terminateur">
+            <a href="../assets/img/loisirs/astro-lune.jpg" target="_blank" rel="noopener">
+              <img src="../assets/img/loisirs/astro-lune.jpg" width="1440" height="1800" loading="lazy" decoding="async"
+                   alt="The gibbous Moon in black and white, with craters along the terminator">
             </a>
-            <figcaption>La Lune</figcaption>
+            <figcaption>The Moon</figcaption>
           </figure>
         </div>
-        <p class="sky-note">Cliquez sur une image pour l'ouvrir en pleine résolution.</p>
+        <p class="sky-note">Click an image to open it in full resolution.</p>
       </div>
     </section>
 
@@ -499,10 +486,10 @@
           <span class="pixel" data-pose="lettre" aria-hidden="true"></span>
         </div>
         <p class="contact-text">
-          Une question sur un projet, une idée à partager,
-          ou simplement envie de parler d'électronique ?
+          A question about a project, an idea to share,
+          or just want to talk electronics?
         </p>
-        <p class="write-me">Écrivez-moi !
+        <p class="write-me">Get in touch!
           <svg viewBox="0 0 72 44" aria-hidden="true"><path d="M4 10C22 3 40 12 37 38"/><path d="M30 31l7 7 6-8"/></svg>
         </p>
         <a class="contact-email" href="mailto:pierre.hilaireau@edu.ece.fr">
@@ -517,7 +504,7 @@
           <li><a class="btn" href="https://github.com/PierreHlr" target="_blank" rel="noopener">GitHub
             <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10v2H6v20h20V16h2v10a2 2 0 0 1-2 2z"/><path d="M20 2v2h6.6L18 12.6l1.4 1.4L28 5.4V12h2V2z"/></svg>
           </a></li>
-          <li><a class="btn" href="assets/cv/CV.pdf" target="_blank" rel="noopener">CV (PDF)
+          <li><a class="btn" href="../assets/cv/CV.pdf" target="_blank" rel="noopener">CV (PDF, in French)
             <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 24v4H6v-4H4v4a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-4zM26 14l-1.4-1.4-7.6 7.6V2h-2v18.2l-7.6-7.6L6 14l10 10z"/></svg>
           </a></li>
         </ul>
@@ -530,7 +517,7 @@
     <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
     <div class="container footer-inner">
       <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
-      <span>Fait main · hébergé sur GitHub Pages</span>
+      <span>Handmade · hosted on GitHub Pages</span>
     </div>
   </footer>
 </body>

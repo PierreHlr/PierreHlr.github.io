@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- VERSION ANGLAISE de projets/double-pendule.html -->
+  <title>Interactive double pendulum — Pierre Hilaireau</title>
+  <meta name="description" content="Double pendulum simulator in Python: Runge-Kutta 4 integration, chaos map based on the Lyapunov exponent and search for periodic motions.">
+  <link rel="alternate" hreflang="fr" href="https://pierrehlr.github.io/projets/double-pendule.html">
+  <link rel="alternate" hreflang="en" href="https://pierrehlr.github.io/en/projects/double-pendulum.html">
+
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#hobbies">Hobbies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="lang-switch" href="../../projets/double-pendule.html" hreflang="fr" lang="fr" title="Version française">FR</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="content">
+
+    <section class="project-header">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <p class="eyebrow">Project · 2024 · Personal project</p>
+        <h1>Interactive double pendulum</h1>
+        <p class="lead">
+          A Python simulator to observe chaos. You set the starting angles, run several pendulums
+          side by side, and two maps computed from 25,600 simulations show where the motion becomes
+          unpredictable, and where it turns periodic again.
+        </p>
+        <ul class="tags"><li>Python</li><li>NumPy</li><li>Tkinter</li><li>Runge-Kutta 4</li><li>Unit tests</li></ul>
+
+        <figure class="project-cover">
+          <img src="../../assets/img/projets/double-pendule/simulation.jpg" width="1600" height="972"
+               alt="Simulator interface (in French): two double pendulums released 0.5° apart, whose trajectories diverge">
+        </figure>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <aside class="datasheet" aria-label="Datasheet">
+        <div class="datasheet-title"><span>Datasheet</span><span>Rev A</span></div>
+        <dl>
+          <dt>Period</dt>
+          <dd>2024</dd>
+          <dt>Context</dt>
+          <dd>Personal project, built alone</dd>
+          <dt>Language</dt>
+          <dd>Python 3.11+, about 3,700 lines and 23 unit tests</dd>
+          <dt>Libraries</dt>
+          <dd>Tkinter (interface), NumPy (maps)</dd>
+          <dt>Methods</dt>
+          <dd>4th-order Runge-Kutta, Lyapunov exponent (Benettin method), parallel computing</dd>
+          <dt>Links</dt>
+          <dd><a href="https://github.com/PierreHlr/double-pendule" target="_blank" rel="noopener">Source code (GitHub)</a></dd>
+        </dl>
+      </aside>
+
+      <article class="prose">
+
+        <h2>Context and goal</h2>
+        <p>
+          The double pendulum is the textbook example of a deterministic yet chaotic system:
+          two almost identical starting points end up producing completely unrelated motions.
+          The goal was to build a tool to see it, and then to measure it:
+        </p>
+        <ul>
+          <li>simulate one or several double pendulums accurately, in real time;</li>
+          <li>set the starting angles with the mouse, the keyboard or a click on a map;</li>
+          <li>map, for each pair of initial angles, the divergence rate and how close
+            the motion is to being periodic.</li>
+        </ul>
+
+        <h2>Physical model and integration</h2>
+        <p>
+          The equations of motion are derived with Lagrangian mechanics (point masses, massless rigid rods),
+          with optional viscous damping. They are integrated with the 4th-order Runge-Kutta method:
+          the error scales as <i>h</i><sup>4</sup>, so halving the time step makes it sixteen times smaller.
+          The animation advances in fixed 5&nbsp;ms steps, independently of the display frame rate.
+        </p>
+        <figure>
+<pre><code><span class="c-keyword">def</span> step(self, dt: float) -&gt; PendulumState:
+    <span class="c-comment">"""Advance the simulation by dt seconds with Runge-Kutta 4."""</span>
+    current = self.state
+    k1 = self.derivatives(current)
+    k2 = self.derivatives(self._offset(current, k1, dt / 2))
+    k3 = self.derivatives(self._offset(current, k2, dt / 2))
+    k4 = self.derivatives(self._offset(current, k3, dt))
+    values = [
+        getattr(current, name)
+        + dt * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6
+        <span class="c-keyword">for</span> i, name <span class="c-keyword">in</span> enumerate(
+            (<span class="c-comment">"theta1"</span>, <span class="c-comment">"omega1"</span>, <span class="c-comment">"theta2"</span>, <span class="c-comment">"omega2"</span>)
+        )
+    ]
+    self.state = PendulumState(*values)
+    self.time += dt
+    <span class="c-keyword">return</span> self.state</code></pre>
+          <figcaption>One Runge-Kutta 4 step, from <code>double_pendulum.py</code> (docstring translated).</figcaption>
+        </figure>
+
+        <h2>Sensitivity to initial conditions</h2>
+        <p>
+          The default configuration launches two pendulums that differ by only 0.5° in θ<sub>1</sub>.
+          The gap between them grows on average as δ(<i>t</i>) ≈ δ<sub>0</sub>·e<sup>λ<i>t</i></sup>:
+          with λ around 1&nbsp;s<sup>−1</sup>, the two trajectories have nothing in common after
+          about 5 seconds, which is exactly what you see on screen. Dividing the initial gap by a thousand
+          only buys about 7 seconds: this is why the motion is unpredictable in the long run.
+        </p>
+
+        <h2>Divergence map</h2>
+        <p>
+          For each starting pair (θ<sub>1</sub>, θ<sub>2</sub>), the application measures the Lyapunov
+          exponent λ with the Benettin method. A “twin” pendulum starts with an offset of 10<sup>−8</sup>.
+          Every 0.1&nbsp;s, the gap is measured and then scaled back to its initial size. This
+          renormalization prevents the gap from saturating and measures the local stretching rate.
+        </p>
+        <figure>
+          <img src="../../assets/img/projets/double-pendule/carte-divergence.jpg" width="1600" height="972" loading="lazy"
+               alt="Divergence map: a dark regular island in the center, surrounded by a bright chaotic region">
+          <figcaption>At small angles (dark center), the motion is regular. The bright area all around is chaotic.</figcaption>
+        </figure>
+
+        <h2>Periodicity map</h2>
+        <p>
+          The second map finds the starting points that come back almost exactly to their initial state.
+          The closest return usually falls between two time steps; its exact time is recovered by
+          parabolic interpolation. The best candidates are then refined by a local search,
+          down to a hundredth of a degree.
+        </p>
+        <p>
+          The bright X crossing at the origin matches the two normal modes of the linearized system:
+          slopes of ±√2, theoretical periods of 2.62&nbsp;s and 1.09&nbsp;s. At larger angles,
+          these modes extend into nonlinear normal modes, whose period changes with the amplitude.
+        </p>
+        <figure>
+          <img src="../../assets/img/projets/double-pendule/carte-periodicite.jpg" width="1600" height="972" loading="lazy"
+               alt="Periodicity map: bright curves of the normal modes and the list of near-periodic motions">
+          <figcaption>The periodicity map, with the near-periodic motions found and their periods on the right.</figcaption>
+        </figure>
+
+        <h2>Performance</h2>
+        <p>
+          Each map has 160 × 160 = 25,600 cells, and each cell is a full 15&nbsp;s simulation,
+          i.e. 1,500 Runge-Kutta steps. Several techniques bring the computation down to a few seconds:
+        </p>
+        <ul>
+          <li><strong>Mirror symmetry</strong>: the start (−θ<sub>1</sub>, −θ<sub>2</sub>) gives the exact
+            mirror image of the motion, so only half of the grid is computed.</li>
+          <li><strong>NumPy vectorization</strong>: all the cells of a batch advance together.</li>
+          <li><strong>Less trigonometry</strong>: only the sine and cosine of θ<sub>1</sub> and θ<sub>2</sub>
+            are computed; the rest follows from the angle addition formulas.</li>
+          <li><strong>Parallel computing</strong> on up to 8 processes, with a map that fills in progressively.</li>
+          <li><strong>Caching</strong>: a map is only recomputed when one of its parameters changes.</li>
+        </ul>
+        <p>
+          Even when computing only half of the grid, the two maps amount to about
+          58 million Runge-Kutta steps.
+        </p>
+
+        <h2>Verification</h2>
+        <p>Automated tests (<code>unittest</code>) check the physics and the computation:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Check</th><th>Criterion</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Energy conservation without damping</td><td>Relative drift &lt; 10<sup>−7</sup> over 5&nbsp;s</td></tr>
+              <tr><td>Vectorized map computation vs. the animation model</td><td>Difference &lt; 10<sup>−10</sup> after 200 steps</td></tr>
+              <tr><td>Period of the in-phase normal mode</td><td>Matches theory within 0.02&nbsp;s</td></tr>
+              <tr><td>Lyapunov exponent</td><td>Small at small angles, clearly positive near the upright position</td></tr>
+              <tr><td>Mirror symmetry</td><td>Same λ for (θ<sub>1</sub>, θ<sub>2</sub>) and (−θ<sub>1</sub>, −θ<sub>2</sub>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Interface</h2>
+        <p>
+          The interface only uses Tkinter, which ships with Python. Since its canvas does not anti-alias
+          shapes, round elements (masses, indicator lights, rounded corners) are computed pixel by pixel
+          and encoded as PNG, for a crisp display on high-resolution screens. Angles can be set with the
+          mouse, the keyboard (to a tenth of a degree) or a click on a map.
+        </p>
+
+        <h2>Limitations</h2>
+        <p>
+          Measurements cover 15&nbsp;s: a longer period is not detected. Each cell covers 2.25°,
+          so finer structures can slip through the grid. Finally, the damping term is a convenient
+          simplification, not an accurate friction model.
+        </p>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projects">← Back to projects</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Handmade · hosted on GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

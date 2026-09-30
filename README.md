@@ -13,6 +13,9 @@ projets/
   double-pendule.html
   _modele-projet.html      Modèle de page projet, à copier pour chaque nouveau projet
                            (le « _ » au début du nom empêche GitHub Pages de le publier)
+en/                        Version anglaise (mêmes images, styles et scripts que la version française)
+  index.html
+  projects/ecepilot.html, neural-speech.html, double-pendulum.html
 css/style.css              Mise en page et couleurs (thème clair et sombre)
 js/main.js                 Thème, LED de l'accueil, personnage pixel art, prénom en ASCII
 assets/
@@ -38,6 +41,13 @@ Dans VS Code, cherche dans tous les fichiers (Ctrl+Maj+F) :
 
 - déposer ton CV dans `assets/cv/CV.pdf`
 - garder dans Compétences uniquement ce que tu sais vraiment faire
+
+## Version anglaise
+
+Chaque page française a sa traduction dans `en/`. Le bouton FR / EN du menu passe de l'une à l'autre.
+**Quand tu modifies un texte en français, pense à modifier aussi la page anglaise correspondante.**
+Pour un nouveau projet, crée aussi sa page dans `en/projects/`, en mettant `../../` devant les chemins
+(`../../css/style.css`, `../../assets/…`), et ajoute sa carte dans `en/index.html`.
 
 ## Ajouter un projet
 

@@ -228,6 +228,16 @@ sup, sub { line-height: 0; } /* évite que les exposants écartent les lignes */
 .theme-toggle:hover { background: var(--ink); color: var(--bg); }
 .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
 
+/* Bouton de langue (FR / EN) */
+.lang-switch {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; margin-left: 8px;
+  border: 1.5px solid var(--ink);
+  font-family: var(--font-mono); font-size: 13px; font-weight: 800;
+  color: var(--ink); text-decoration: none;
+}
+.lang-switch:hover { background: var(--ink); color: var(--bg); text-decoration: none; }
+
 /* Lune en thème clair, soleil en thème sombre */
 .icon-sun { display: none; }
 :root[data-theme="dark"] .icon-sun { display: block; }
@@ -239,7 +249,8 @@ sup, sub { line-height: 0; } /* évite que les exposants écartent les lignes */
 
 @media (max-width: 672px) {
   .nav-inner { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 6px; }
-  .nav-links { order: 3; width: 100%; margin: 0 -10px; overflow-x: auto; }
+  .nav-links { order: 3; width: calc(100% + 8px); margin: 0 -4px; justify-content: space-between; overflow-x: auto; }
+  .nav-links a { padding: 6px 4px; font-size: 14px; }   /* les 5 liens tiennent sur une ligne */
 }
 
 /* ---------- Boutons ---------- */
