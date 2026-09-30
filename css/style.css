@@ -492,6 +492,26 @@ sup, sub { line-height: 0; } /* évite que les exposants écartent les lignes */
 .languages { margin-top: 32px; font-size: 1.05rem; }
 .languages strong { font-weight: 800; }
 
+/* ---------- Loisirs ---------- */
+
+.skill-group .hobby-text { margin: 0 0 14px; font-size: 15px; line-height: 1.45; color: var(--muted); }
+
+.sky-title { margin-top: 64px; }
+
+.sky-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+.sky-gallery figure { margin: 0; }
+.sky-gallery a { display: block; overflow: hidden; background: #000; border: 1.5px solid var(--ink); }
+/* Vignettes carrées recadrées par le navigateur : les fichiers restent intacts */
+.sky-gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform 0.3s; }
+.sky-gallery a:hover img { transform: scale(1.04); }
+@media (max-width: 560px) { .sky-gallery { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+.sky-note { margin-top: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--helper); }
+
 /* ---------- Parcours ---------- */
 
 .about {
@@ -750,6 +770,7 @@ td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .card, .btn { transition: none; }
+  .sky-gallery img, .sky-gallery a:hover img { transition: none; transform: none; }
 }
 
 /* =========================================================
@@ -797,8 +818,6 @@ td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .section-head { position: relative; }
 .section-head .pixel { position: absolute; right: 0; bottom: 0; }
 
-.about-row { display: flex; align-items: flex-end; gap: 40px; margin-bottom: 64px; }
-.about-row .about { margin-bottom: 0; }
 
 .project-header .container { position: relative; }
 .pixel-project { position: absolute; right: 32px; top: 0; }
@@ -808,7 +827,6 @@ td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
 @media (max-width: 672px) {
   .pixel-hero, .section-head .pixel { width: 60px; height: 72px; }
-  .about-row .pixel { width: 60px; height: 72px; }
   .pixel-project { right: 16px; width: 60px; height: 72px; }
   .pixel-footer { right: 24px; }
 }
