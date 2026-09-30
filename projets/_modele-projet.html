@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    MODÈLE DE PAGE PROJET
+    Pour créer un nouveau projet : copie ce fichier, renomme-le (ex. station-meteo.html),
+    puis remplace les textes. Mets les images dans assets/img/projets/<nom-du-projet>/.
+  -->
+  <title>[Nom du projet] — Pierre Hilaireau</title>
+  <meta name="description" content="[Résumé du projet en une phrase]">
+
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="../index.html#projets">Projets</a>
+        <a href="../index.html#competences">Compétences</a>
+        <a href="../index.html#parcours">Parcours</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Basculer entre thème clair et sombre">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== EN-TÊTE DU PROJET ===================== -->
+    <section class="project-header grid-bg">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projets">← Tous les projets</a>
+        <p class="eyebrow">Projet · 2025 · Projet d'école</p>
+        <h1>[Nom du projet]</h1>
+        <!-- Le résumé est souvent la seule chose qu'on lit : va à l'essentiel -->
+        <p class="lead">
+          Résumé en deux phrases : ce que fait l'objet, pour qui, et ce que tu as réalisé toi-même.
+        </p>
+        <ul class="tags"><li>KiCad</li><li>STM32</li><li>C</li><li>Capteurs</li></ul>
+
+        <figure class="project-cover">
+          <img src="../assets/img/placeholder.svg" alt="[Photo de la carte assemblée]">
+        </figure>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <!-- ===================== FICHE TECHNIQUE ===================== -->
+      <aside class="datasheet" aria-label="Fiche technique">
+        <div class="datasheet-title"><span>Fiche technique</span><span>Rev A</span></div>
+        <dl>
+          <dt>Période</dt>
+          <dd>[Sept. 2025 — Janv. 2026]</dd>
+          <dt>Cadre</dt>
+          <dd>[Projet d'école, équipe de 3]</dd>
+          <dt>Mon rôle</dt>
+          <dd>[Conception du PCB et du firmware]</dd>
+          <dt>Composants clés</dt>
+          <dd>[STM32L4, capteur BME280, module LoRa]</dd>
+          <dt>Outils</dt>
+          <dd>[KiCad 8, STM32CubeIDE, oscilloscope]</dd>
+          <dt>Liens</dt>
+          <dd>
+            <!-- Supprime les liens que tu n'as pas -->
+            <a href="https://github.com/PierreHlr" target="_blank" rel="noopener">Code source (GitHub)</a><br>
+            <a href="#">Schéma complet (PDF)</a>
+          </dd>
+        </dl>
+      </aside>
+
+      <!-- ===================== DESCRIPTION ===================== -->
+      <article class="prose">
+
+        <h2>Contexte et objectif</h2>
+        <p>
+          Pourquoi ce projet existe : le besoin, le cadre (cours, association, projet perso)
+          et les contraintes (alimentation, taille, coût, délai…).
+        </p>
+        <ul>
+          <li>Objectif chiffré n°1 (ex. mesurer la température à ±0,5 °C)</li>
+          <li>Objectif chiffré n°2 (ex. six mois d'autonomie sur pile)</li>
+          <li>Contrainte (ex. budget inférieur à 30 €)</li>
+        </ul>
+
+        <h2>Architecture</h2>
+        <p>
+          Un schéma bloc vaut mieux qu'un long paragraphe : alimentation, microcontrôleur,
+          capteurs, communication. Explique les choix importants : pourquoi ce microcontrôleur,
+          ce régulateur, ce capteur plutôt qu'un autre.
+        </p>
+        <figure>
+          <img src="../assets/img/placeholder.svg" alt="[Schéma bloc du système]" loading="lazy">
+          <figcaption>Schéma bloc du système.</figcaption>
+        </figure>
+
+        <h2>Conception de la carte</h2>
+        <p>
+          Schéma et routage : nombre de couches, points délicats (découplage, plan de masse,
+          pistes de puissance, antenne) et fabrication (JLCPCB, gravure maison…).
+        </p>
+        <div class="figure-row">
+          <figure>
+            <img src="../assets/img/placeholder.svg" alt="[Schéma électronique sous KiCad]" loading="lazy">
+            <figcaption>Schéma électronique (KiCad).</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/placeholder.svg" alt="[Routage du circuit imprimé]" loading="lazy">
+            <figcaption>Routage du PCB, 2 couches.</figcaption>
+          </figure>
+        </div>
+
+        <h2>Firmware</h2>
+        <p>
+          Langage, organisation du code (interruptions, machine à états, RTOS…) et protocoles
+          utilisés (I²C, SPI, UART, BLE…). Un court extrait bien choisi suffit : le reste va sur GitHub.
+        </p>
+<pre><code><span class="c-comment">// Exemple : lecture du capteur toutes les 10 s, puis mise en veille</span>
+<span class="c-keyword">while</span> (1) {
+    mesure_t m = capteur_lire();
+    radio_envoyer(&amp;m);
+    veille_profonde(10000);
+}</code></pre>
+
+        <h2>Tests et résultats</h2>
+        <p>
+          C'est ce qui distingue un bon portfolio en électronique : des mesures.
+          Compare ce que tu visais à ce que tu as obtenu, et montre une capture d'oscilloscope.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Paramètre</th><th>Objectif</th><th>Mesuré</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Consommation en veille</td><td class="num">&lt; 50 µA</td><td class="num ok">38 µA</td></tr>
+              <tr><td>Précision de mesure</td><td class="num">± 0,5 °C</td><td class="num ok">± 0,3 °C</td></tr>
+              <tr><td>Autonomie estimée</td><td class="num">6 mois</td><td class="num ok">9 mois</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Galerie</h2>
+        <div class="gallery">
+          <figure>
+            <img src="../assets/img/placeholder.svg" alt="[Description de la photo]" loading="lazy">
+            <figcaption>Prototype sur plaque d'essai.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/placeholder.svg" alt="[Description de la photo]" loading="lazy">
+            <figcaption>Carte assemblée.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/placeholder.svg" alt="[Description de la photo]" loading="lazy">
+            <figcaption>Capture d'oscilloscope.</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projets">← Retour aux projets</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Fait main · hébergé sur GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

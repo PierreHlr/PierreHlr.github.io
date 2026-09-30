@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Double pendule interactif — Pierre Hilaireau</title>
+  <meta name="description" content="Simulateur de double pendule en Python : intégration Runge-Kutta 4, carte du chaos par exposant de Lyapunov et recherche de mouvements périodiques.">
+
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="../index.html#projets">Projets</a>
+        <a href="../index.html#competences">Compétences</a>
+        <a href="../index.html#parcours">Parcours</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Basculer entre thème clair et sombre">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== EN-TÊTE DU PROJET ===================== -->
+    <section class="project-header grid-bg">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projets">← Tous les projets</a>
+        <p class="eyebrow">Projet · 2024 · Projet personnel</p>
+        <h1>Double pendule interactif</h1>
+        <p class="lead">
+          Un simulateur en Python pour observer le chaos. On règle les angles de départ,
+          on lance plusieurs pendules côte à côte, et deux cartes calculées sur
+          25&nbsp;600 simulations montrent où le mouvement devient imprévisible,
+          et où il redevient périodique.
+        </p>
+        <ul class="tags"><li>Python</li><li>NumPy</li><li>Tkinter</li><li>Runge-Kutta 4</li><li>Tests unitaires</li></ul>
+
+        <figure class="project-cover">
+          <img src="../assets/img/projets/double-pendule/simulation.jpg" width="1600" height="972"
+               alt="Interface du simulateur : deux doubles pendules partis à 0,5° d'écart, dont les trajectoires se séparent">
+        </figure>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <!-- ===================== FICHE TECHNIQUE ===================== -->
+      <aside class="datasheet" aria-label="Fiche technique">
+        <div class="datasheet-title"><span>Fiche technique</span><span>Rev A</span></div>
+        <dl>
+          <dt>Période</dt>
+          <dd>2024</dd>
+          <dt>Cadre</dt>
+          <dd>Projet personnel, réalisé seul</dd>
+          <dt>Langage</dt>
+          <dd>Python 3.11+, environ 3&nbsp;700 lignes et 23 tests unitaires</dd>
+          <dt>Bibliothèques</dt>
+          <dd>Tkinter (interface), NumPy (cartes)</dd>
+          <dt>Méthodes</dt>
+          <dd>Runge-Kutta d'ordre 4, exposant de Lyapunov (méthode de Benettin), calcul parallèle</dd>
+          <dt>Liens</dt>
+          <dd><a href="https://github.com/PierreHlr/double-pendule" target="_blank" rel="noopener">Code source (GitHub)</a></dd>
+        </dl>
+      </aside>
+
+      <!-- ===================== DESCRIPTION ===================== -->
+      <article class="prose">
+
+        <h2>Contexte et objectif</h2>
+        <p>
+          Le double pendule est l'exemple classique d'un système déterministe mais chaotique :
+          deux départs presque identiques finissent par donner des mouvements sans rapport.
+          L'objectif était de construire un outil pour le voir, puis pour le mesurer :
+        </p>
+        <ul>
+          <li>simuler un ou plusieurs doubles pendules avec précision, en temps réel ;</li>
+          <li>régler les angles de départ à la souris, au clavier ou d'un clic sur une carte ;</li>
+          <li>cartographier, pour chaque couple d'angles initiaux, la vitesse de divergence
+            et la proximité d'un mouvement périodique.</li>
+        </ul>
+
+        <h2>Modèle physique et intégration</h2>
+        <p>
+          Les équations du mouvement sont établies par la mécanique de Lagrange (masses ponctuelles,
+          tiges rigides sans masse), avec un amortissement visqueux optionnel. Elles sont intégrées
+          par la méthode de Runge-Kutta d'ordre&nbsp;4 : l'erreur décroît comme <i>h</i><sup>4</sup>,
+          donc diviser le pas par deux la rend seize fois plus petite. L'animation avance par pas
+          fixes de 5&nbsp;ms, indépendamment de la fréquence d'affichage.
+        </p>
+        <figure>
+<pre><code><span class="c-keyword">def</span> step(self, dt: float) -&gt; PendulumState:
+    <span class="c-comment">"""Avance la simulation de dt secondes avec Runge-Kutta 4."""</span>
+    current = self.state
+    k1 = self.derivatives(current)
+    k2 = self.derivatives(self._offset(current, k1, dt / 2))
+    k3 = self.derivatives(self._offset(current, k2, dt / 2))
+    k4 = self.derivatives(self._offset(current, k3, dt))
+    values = [
+        getattr(current, name)
+        + dt * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6
+        <span class="c-keyword">for</span> i, name <span class="c-keyword">in</span> enumerate(
+            (<span class="c-comment">"theta1"</span>, <span class="c-comment">"omega1"</span>, <span class="c-comment">"theta2"</span>, <span class="c-comment">"omega2"</span>)
+        )
+    ]
+    self.state = PendulumState(*values)
+    self.time += dt
+    <span class="c-keyword">return</span> self.state</code></pre>
+          <figcaption>Un pas de Runge-Kutta 4, extrait de <code>double_pendulum.py</code>.</figcaption>
+        </figure>
+
+        <h2>Sensibilité aux conditions initiales</h2>
+        <p>
+          La configuration fournie lance deux pendules qui ne diffèrent que de 0,5° sur θ<sub>1</sub>.
+          L'écart entre eux croît en moyenne comme δ(<i>t</i>) ≈ δ<sub>0</sub>·e<sup>λ<i>t</i></sup> :
+          avec λ de l'ordre de 1&nbsp;s<sup>−1</sup>, les deux trajectoires n'ont plus rien en commun
+          au bout d'environ 5 secondes, ce qu'on observe à l'écran. Diviser l'écart initial par mille
+          ne fait gagner qu'environ 7 secondes : c'est pourquoi le mouvement est imprévisible à long terme.
+        </p>
+
+        <h2>Carte de divergence</h2>
+        <p>
+          Pour chaque couple (θ<sub>1</sub>, θ<sub>2</sub>) de départ, l'application mesure l'exposant
+          de Lyapunov λ par la méthode de Benettin. Un pendule « jumeau » part avec un écart de 10<sup>−8</sup>.
+          Toutes les 0,1&nbsp;s, on mesure l'écart, puis on le ramène à sa taille initiale. Cette
+          renormalisation évite que l'écart sature et permet de mesurer le taux d'étirement local.
+        </p>
+        <figure>
+          <img src="../assets/img/projets/double-pendule/carte-divergence.jpg" width="1600" height="972" loading="lazy"
+               alt="Carte de divergence : îlot régulier sombre au centre, zone chaotique claire autour">
+          <figcaption>Aux petits angles (centre sombre), le mouvement est régulier. La zone claire tout autour est chaotique.</figcaption>
+        </figure>
+
+        <h2>Carte de périodicité</h2>
+        <p>
+          La seconde carte repère les départs qui repassent presque exactement par leur état initial.
+          Le retour le plus proche tombe en général entre deux pas de calcul. Son instant exact est
+          retrouvé par interpolation parabolique. Les meilleurs candidats sont ensuite affinés par
+          une recherche locale, jusqu'au centième de degré.
+        </p>
+        <p>
+          Le X lumineux qui se croise à l'origine correspond aux deux modes propres du système linéarisé :
+          pentes ±√2, périodes théoriques de 2,62&nbsp;s et 1,09&nbsp;s. Aux plus grands angles,
+          ces modes se prolongent en modes normaux non linéaires, dont la période change avec l'amplitude.
+        </p>
+        <figure>
+          <img src="../assets/img/projets/double-pendule/carte-periodicite.jpg" width="1600" height="972" loading="lazy"
+               alt="Carte de périodicité : courbes claires des modes propres et liste des mouvements presque périodiques">
+          <figcaption>La carte de périodicité, et à droite les mouvements presque périodiques trouvés avec leur période.</figcaption>
+        </figure>
+
+        <h2>Performances</h2>
+        <p>
+          Chaque carte compte 160 × 160 = 25&nbsp;600 cases, et chaque case est une simulation complète
+          de 15&nbsp;s, soit 1&nbsp;500 pas de Runge-Kutta. Plusieurs techniques ramènent le calcul
+          à quelques secondes :
+        </p>
+        <ul>
+          <li><strong>Symétrie miroir</strong> : le départ (−θ<sub>1</sub>, −θ<sub>2</sub>) donne le reflet
+            exact du mouvement, donc seule la moitié de la grille est calculée.</li>
+          <li><strong>Vectorisation avec NumPy</strong> : toutes les cases d'un lot avancent ensemble.</li>
+          <li><strong>Moins de trigonométrie</strong> : seuls le sinus et le cosinus de θ<sub>1</sub> et θ<sub>2</sub>
+            sont calculés, le reste s'en déduit par les formules d'addition.</li>
+          <li><strong>Calcul parallèle</strong> sur 8 processus au plus, avec une carte qui se remplit au fur et à mesure.</li>
+          <li><strong>Cache</strong> : une carte n'est recalculée que si l'un de ses paramètres change.</li>
+        </ul>
+        <p>
+          Même en ne calculant que la moitié de la grille, les deux cartes représentent environ
+          58 millions de pas de Runge-Kutta.
+        </p>
+
+        <h2>Vérifications</h2>
+        <p>Des tests automatiques (<code>unittest</code>) contrôlent la physique et le calcul :</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Vérification</th><th>Critère</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Conservation de l'énergie sans amortissement</td><td>Dérive relative &lt; 10<sup>−7</sup> sur 5&nbsp;s</td></tr>
+              <tr><td>Calcul vectorisé des cartes, comparé au modèle de l'animation</td><td>Écart &lt; 10<sup>−10</sup> après 200 pas</td></tr>
+              <tr><td>Période du mode propre en phase</td><td>Égale à la théorie à 0,02&nbsp;s près</td></tr>
+              <tr><td>Exposant de Lyapunov</td><td>Faible aux petits angles, nettement positif près de la verticale ascendante</td></tr>
+              <tr><td>Symétrie miroir</td><td>Même λ pour (θ<sub>1</sub>, θ<sub>2</sub>) et (−θ<sub>1</sub>, −θ<sub>2</sub>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Interface</h2>
+        <p>
+          L'interface n'utilise que Tkinter, inclus dans Python. Son canvas ne lissant pas les formes,
+          les éléments ronds (masses, voyants, coins arrondis) sont calculés pixel par pixel et encodés
+          en PNG, pour un affichage net sur les écrans haute résolution. Les angles se règlent à la souris,
+          au clavier (au dixième de degré) ou d'un clic sur une carte.
+        </p>
+
+        <h2>Limites</h2>
+        <p>
+          Les mesures portent sur 15&nbsp;s : une période plus longue n'est pas détectée.
+          Une case couvre 2,25°, donc des structures plus fines peuvent passer entre les mailles.
+          Enfin, l'amortissement est une simplification commode, pas un modèle précis des frottements.
+        </p>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projets">← Retour aux projets</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Fait main · hébergé sur GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

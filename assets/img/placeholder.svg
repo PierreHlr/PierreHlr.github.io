@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <style>
+    .fond { fill: #e2dccf; } .anneau { stroke: #1b1b1b; } .txt { fill: #4d4a45; }
+    @media (prefers-color-scheme: dark) {
+      .fond { fill: #2e2b27; } .anneau { stroke: #ebe6dc; } .txt { fill: #bdb6aa; }
+    }
+  </style>
+  <rect class="fond" width="800" height="500"/>
+  <!-- Petit cercle op-art, en écho à l'accueil -->
+  <g class="anneau" fill="none" stroke-width="2" opacity="0.35">
+    <circle cx="400" cy="215" r="90"/><circle cx="402" cy="216" r="80"/><circle cx="404" cy="217" r="70"/>
+    <circle cx="406" cy="218" r="60"/><circle cx="408" cy="219" r="50"/><circle cx="410" cy="220" r="40"/>
+    <circle cx="412" cy="221" r="30"/><circle cx="414" cy="222" r="20"/><circle cx="416" cy="223" r="10"/>
+  </g>
+  <text class="txt" x="400" y="360" text-anchor="middle" font-family="JetBrains Mono, Consolas, monospace" font-size="18" font-weight="800">IMAGE À REMPLACER</text>
+</svg>

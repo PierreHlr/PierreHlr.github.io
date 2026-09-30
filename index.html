@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Titre et description : visibles dans Google et les partages LinkedIn -->
+  <title>Pierre Hilaireau — Électronique &amp; systèmes embarqués</title>
+  <meta name="description" content="Portfolio de Pierre Hilaireau, étudiant ingénieur en systèmes embarqués : conception de cartes électroniques, firmware, traitement du signal et projets réalisés.">
+  <meta property="og:title" content="Pierre Hilaireau — Portfolio électronique">
+  <meta property="og:description" content="Projets en électronique, systèmes embarqués et traitement du signal.">
+  <meta property="og:type" content="website">
+  <!-- Image d'aperçu pour les partages (1200×630 px). Décommente quand tu l'as ajoutée :
+  <meta property="og:image" content="https://pierrehlr.github.io/assets/img/apercu.jpg"> -->
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    // Applique le thème mémorisé avant l'affichage (évite un flash de couleur)
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- ===================== MENU ===================== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="#top">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#projets">Projets</a>
+        <a href="#competences">Compétences</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Basculer entre thème clair et sombre">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== ACCUEIL ===================== -->
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="rule" aria-hidden="true"></span>
+          <h1 class="poster-title">
+            <span class="t-heavy">Portfolio</span>
+            <span class="t-heavy">d'électronique</span>
+            <span class="t-light">embarquée</span>
+          </h1>
+          <p class="lead">
+            Je conçois des cartes électroniques et le firmware qui les fait fonctionner,
+            du schéma jusqu'aux mesures.
+          </p>
+
+          <!-- Prénom en art ASCII animé (dessiné par js/main.js à partir de data-ascii) -->
+          <div class="ascii-name" role="img" aria-label="Pierre" data-ascii="PIERRE">
+            <span class="ascii-fallback">Pierre</span>
+          </div>
+
+          <span class="rule" aria-hidden="true"></span>
+          <p class="hero-date">Étudiant en M1 Systèmes embarqués à l'ECE Paris</p>
+          <p class="hero-info">Électronique embarquée<br>Instrumentation · Signal</p>
+          <span class="rule" aria-hidden="true"></span>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projets">Voir mes projets
+              <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M24.6 16.6 17 24.2V4h-2v20.2l-7.6-7.6L6 18l10 10 10-10z"/></svg>
+            </a>
+            <!-- Dépose ton CV dans assets/cv/ sous le nom CV.pdf -->
+            <a class="btn" href="assets/cv/CV.pdf" target="_blank" rel="noopener">Mon CV (PDF)
+              <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 24v4H6v-4H4v4a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-4zM26 14l-1.4-1.4-7.6 7.6V2h-2v18.2l-7.6-7.6L6 14l10 10z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!--
+          Illustration : un circuit imprimé en vue isométrique.
+          Le dessus de la carte est dessiné « à plat » (coordonnées 0-400 × 0-320),
+          puis projeté en isométrique par la matrice du groupe <g transform="matrix(…)">.
+          La LED D1 s'allume quand la souris approche (voir js/main.js).
+        -->
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 650 430" data-led>
+            <!-- Tranches de la carte (épaisseur) -->
+            <polygon class="iso-left iso-edge" points="19.8,200 359.3,396 359.3,410 19.8,214"/>
+            <polygon class="iso-right iso-edge" points="359.3,396 629.5,240 629.5,254 359.3,410"/>
+
+            <!-- Dessus de la carte, projeté en isométrique -->
+            <g transform="matrix(0.866 0.5 -0.866 0.5 290 40)">
+              <rect class="iso-top iso-edge" x="4" y="4" width="392" height="312"/>
+              <circle class="iso-hole" cx="24" cy="24" r="7"/>
+              <circle class="iso-hole" cx="376" cy="24" r="7"/>
+              <circle class="iso-hole" cx="24" cy="296" r="7"/>
+              <circle class="iso-hole" cx="376" cy="296" r="7"/>
+
+              <!-- Lumière de la LED sur la carte (opacité réglée par --lum) -->
+              <circle class="d1-ring d1-ring-3" cx="84" cy="46" r="56"/>
+              <circle class="d1-ring d1-ring-2" cx="84" cy="46" r="38"/>
+              <circle class="d1-ring d1-ring-1" cx="84" cy="46" r="23"/>
+
+              <g class="pcb-trace">
+                <path d="M140 128 H104 L84 108 V101"/>
+                <path d="M84 75 V61"/>
+                <path d="M69 46 H48"/>
+                <path d="M140 160 H108"/>
+                <path d="M88 160 H44"/>
+                <path d="M140 192 H112 L92 212 V262"/>
+                <path d="M260 128 H296 L316 108 V62"/>
+                <path d="M260 144 H342"/>
+                <path d="M260 176 H290 L310 196 H352"/>
+                <path d="M260 192 H276 L296 212 V266"/>
+                <path d="M168 100 V34"/>
+                <path d="M200 100 V40"/>
+                <path d="M232 100 V78 L252 58 H282"/>
+                <path d="M184 220 V254 L164 274 H124"/>
+                <path d="M216 220 V284"/>
+              </g>
+
+              <path class="pcb-signal" d="M140 128 H104 L84 108 V101"/>
+              <path class="pcb-signal" d="M260 144 H342" style="animation-delay: -1.6s"/>
+
+              <g class="pcb-via">
+                <circle cx="48" cy="46" r="5.5"/>
+                <circle cx="44" cy="160" r="5.5"/>
+                <circle cx="92" cy="262" r="5.5"/>
+                <circle cx="316" cy="62" r="5.5"/>
+                <circle cx="342" cy="144" r="5.5"/>
+                <circle cx="352" cy="196" r="5.5"/>
+                <circle cx="296" cy="266" r="5.5"/>
+                <circle cx="168" cy="34" r="5.5"/>
+                <circle cx="200" cy="40" r="5.5"/>
+                <circle cx="282" cy="58" r="5.5"/>
+                <circle cx="124" cy="274" r="5.5"/>
+                <circle cx="216" cy="284" r="5.5"/>
+              </g>
+
+              <!-- R1 -->
+              <rect class="pcb-outline" x="79" y="151" width="38" height="18"/>
+              <rect class="pcb-pad" x="84" y="155" width="8" height="10"/>
+              <rect class="pcb-pad" x="104" y="155" width="8" height="10"/>
+              <text class="pcb-silk" x="98" y="145" text-anchor="middle">R1</text>
+
+              <!-- R2 : résistance série de la LED -->
+              <rect class="pcb-outline" x="75" y="68" width="18" height="40"/>
+              <rect class="pcb-pad" x="79" y="71" width="10" height="8"/>
+              <rect class="pcb-pad" x="79" y="97" width="10" height="8"/>
+              <text class="pcb-silk" x="99" y="92">R2</text>
+
+              <!-- Empreinte de la LED D1 (méplat côté cathode) -->
+              <path class="pcb-outline" d="M69 38.5 A15 15 0 1 1 69 53.5 Z"/>
+
+              <!-- C1 -->
+              <rect class="pcb-outline" x="325" y="235" width="30" height="16"/>
+              <rect class="pcb-pad" x="328" y="238" width="8" height="10"/>
+              <rect class="pcb-pad" x="344" y="238" width="8" height="10"/>
+              <text class="pcb-silk" x="340" y="228" text-anchor="middle">C1</text>
+
+              <!-- Broches de U1 -->
+              <g class="pcb-pin">
+                <rect x="140" y="125" width="10" height="6"/><rect x="140" y="141" width="10" height="6"/><rect x="140" y="157" width="10" height="6"/><rect x="140" y="173" width="10" height="6"/><rect x="140" y="189" width="10" height="6"/>
+                <rect x="250" y="125" width="10" height="6"/><rect x="250" y="141" width="10" height="6"/><rect x="250" y="157" width="10" height="6"/><rect x="250" y="173" width="10" height="6"/><rect x="250" y="189" width="10" height="6"/>
+                <rect x="165" y="100" width="6" height="10"/><rect x="181" y="100" width="6" height="10"/><rect x="197" y="100" width="6" height="10"/><rect x="213" y="100" width="6" height="10"/><rect x="229" y="100" width="6" height="10"/>
+                <rect x="165" y="210" width="6" height="10"/><rect x="181" y="210" width="6" height="10"/><rect x="197" y="210" width="6" height="10"/><rect x="213" y="210" width="6" height="10"/><rect x="229" y="210" width="6" height="10"/>
+              </g>
+
+              <!-- Repère de D1 et sa valeur PWM (mise à jour par js/main.js) -->
+              <text class="pcb-silk" x="102" y="40">D1</text>
+              <text class="pcb-silk" x="102" y="54">PWM <tspan data-pwm>6%</tspan></text>
+
+              <text class="pcb-silk" x="42" y="300">PORTFOLIO · REV A</text>
+            </g>
+
+            <!-- U1 : le microcontrôleur, en relief -->
+            <polygon class="chip-left" points="238,200 324.6,250 324.6,270 238,220"/>
+            <polygon class="chip-right" points="324.6,250 411.2,200 411.2,220 324.6,270"/>
+            <g transform="matrix(0.866 0.5 -0.866 0.5 290 20)">
+              <rect class="chip-top" x="150" y="110" width="100" height="100"/>
+              <circle class="chip-dot" cx="163" cy="123" r="3"/>
+              <text class="chip-text" x="200" y="165" text-anchor="middle">U1</text>
+            </g>
+
+            <!-- D1 : LED dont la luminosité suit la souris (voir js/main.js) -->
+            <g class="d1-off">
+              <path class="d1-side" d="M310.7 91 V105 A12.2 7.1 0 0 0 335.1 105 V91 Z"/>
+              <ellipse class="d1-top d1-eteinte" cx="322.9" cy="91" rx="12.2" ry="7.1"/>
+            </g>
+            <g class="d1-on">
+              <path class="d1-side" d="M310.7 91 V105 A12.2 7.1 0 0 0 335.1 105 V91 Z"/>
+              <ellipse class="d1-top" cx="322.9" cy="91" rx="12.2" ry="7.1"/>
+            </g>
+            <ellipse class="d1-reflet" cx="318" cy="89.5" rx="4" ry="1.8"/>
+
+          </svg>
+          <span class="pixel pixel-hero" data-pose="salut" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJETS ===================== -->
+    <section class="section" id="projets">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <h2>Projets</h2>
+          <span class="pixel" data-pose="loupe" aria-hidden="true"></span>
+        </div>
+        <p class="section-intro">
+          Une sélection de projets que j'ai conçus et réalisés, de la carte au code.
+          Chaque fiche détaille la démarche, les choix techniques et les mesures obtenues.
+        </p>
+
+        <!--
+          POUR AJOUTER UN PROJET : copie un bloc <a class="card"> … </a> ci-dessous,
+          change le lien (href), l'image, le titre, la description et les tags.
+          Mets ton meilleur projet en premier.
+        -->
+        <div class="cards">
+
+          <a class="card" href="projets/ecepilot.html">
+            <div class="card-img">
+              <img src="assets/img/projets/ecepilot/illustration.svg" width="960" height="600" loading="lazy"
+                   alt="Illustration du rover ECEPilot vu de dessus, avec les rayons de son LiDAR">
+            </div>
+            <div class="card-body">
+              <p class="card-meta">Depuis sept. 2026 · Paris</p>
+              <h3>ECEPilot</h3>
+              <p>Robot rover piloté en Wi-Fi avec perception LiDAR 360° : trois microcontrôleurs et une télécommande sur PCB conçu sous KiCad.</p>
+              <ul class="tags"><li>ATmega328P</li><li>ESP32</li><li>KiCad</li><li>ROS2</li></ul>
+              <span class="card-more">Voir le projet <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
+            </div>
+          </a>
+
+          <a class="card" href="projets/neural-speech.html">
+            <div class="card-img">
+              <img src="assets/img/projets/neural-speech/vignette.jpg" width="960" height="600" loading="lazy"
+                   alt="Rendu 3D du boîtier Pokéball gravé PokECE">
+            </div>
+            <div class="card-body">
+              <p class="card-meta">Janv. — mai 2026 · ECE Lyon</p>
+              <h3>Neural Speech</h3>
+              <p>Reconnaissance vocale embarquée : un « Pokédex » qui reconnaît le mot prononcé grâce à un réseau de neurones exécuté sur un Arduino Due.</p>
+              <ul class="tags"><li>C/C++</li><li>Arduino Due</li><li>MFCC</li><li>CNN</li></ul>
+              <span class="card-more">Voir le projet <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
+            </div>
+          </a>
+
+          <a class="card" href="projets/double-pendule.html">
+            <div class="card-img">
+              <img src="assets/img/projets/double-pendule/vignette.jpg" width="960" height="600" loading="lazy"
+                   alt="Deux doubles pendules partis presque du même point, dont les trajectoires divergent">
+            </div>
+            <div class="card-body">
+              <p class="card-meta">2024 · Projet personnel</p>
+              <h3>Double pendule interactif</h3>
+              <p>Simulateur en Python : intégration Runge-Kutta 4, carte du chaos par exposant de Lyapunov et recherche de mouvements périodiques.</p>
+              <ul class="tags"><li>Python</li><li>NumPy</li><li>Runge-Kutta 4</li></ul>
+              <span class="card-more">Voir le projet <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M18 6l-1.4 1.4 7.6 7.6H4v2h20.2l-7.6 7.6L18 26l10-10z"/></svg></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMPÉTENCES ===================== -->
+    <!-- Sous chaque outil : CE QUE tu en as fait (plus parlant qu'un niveau) -->
+    <section class="section" id="competences">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">02</span>
+          <h2>Compétences</h2>
+          <span class="pixel" data-pose="multimetre" aria-hidden="true"></span>
+        </div>
+        <p class="section-intro">Les langages et outils que j'utilise, avec le contexte dans lequel je les ai pratiqués.</p>
+
+        <div class="skills">
+          <div class="skill-group">
+            <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="8" width="16" height="16"/><path d="M12 8V4M16 8V4M20 8V4M12 28v-4M16 28v-4M20 28v-4M8 12H4M8 16H4M8 20H4M28 12h-4M28 16h-4M28 20h-4"/><rect x="11" y="11" width="4" height="4"/><rect x="17" y="11" width="4" height="4"/><rect x="11" y="17" width="4" height="4"/><rect x="17" y="17" width="4" height="4"/></svg>
+            <h3>Électronique numérique &amp; FPGA</h3>
+            <ul>
+              <li>VHDL · SystemVerilog<span>Description de circuits numériques</span></li>
+              <li>Quartus<span>Synthèse et implémentation sur FPGA</span></li>
+              <li>Circuits numériques<span>Cours FPGA (ECE) et Digital Circuit (Ajou University)</span></li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="18"/><path d="M3 14h26" stroke-dasharray="1 2"/><path d="M5 14c2.5-7 5-7 7 0s4.5 7 7 0 4.5-7 7-2"/><path d="M12 23v4M20 23v4M8 27h16"/></svg>
+            <h3>Embarqué &amp; signal</h3>
+            <ul>
+              <li>C / C++<span>Firmware sur Arduino Due (Cortex-M3), ATmega328P et ESP32</span></li>
+              <li>Assembleur · MPLAB X<span>Programmation bas niveau de microcontrôleurs</span></li>
+              <li>Traitement du signal<span>Acquisition ADC par interruptions et filtre RIF en temps réel</span></li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l12 7v12l-12 7-12-7V10z"/><path d="M4 10l12 7 12-7M16 17v12"/><path d="M10 13.5v7M22 13.5v7" stroke-dasharray="1 2"/></svg>
+            <h3>Conception &amp; CAO</h3>
+            <ul>
+              <li>KiCad<span>PCB de la télécommande du robot ECEPilot</span></li>
+              <li>Proteus<span>Simulation de circuits</span></li>
+              <li>Shapr3D<span>Modélisation 3D</span></li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <svg class="pictogram" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="5" width="26" height="22"/><path d="M3 10h26"/><path d="M5.5 7.5h1M8.5 7.5h1"/><path d="M8 15l4 3.5L8 22M15 22h8"/></svg>
+            <h3>Programmation &amp; outils</h3>
+            <ul>
+              <li>Python<span>Modélisation de données, simulation numérique, entraînement d'un CNN</span></li>
+              <li>ROS2 · Linux embarqué<span>Robot ECEPilot, cours de Linux embarqué</span></li>
+              <li>Java · LaTeX<span>Programmation objet, rédaction technique sur Overleaf</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="languages">
+          <strong>Langues :</strong> français (natif) · allemand (bilingue, Abitur) ·
+          anglais (professionnel, TOEIC 825/990) · coréen (débutant)
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== PARCOURS ===================== -->
+    <section class="section" id="parcours">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">03</span>
+          <h2>Parcours</h2>
+          <span class="pixel" data-pose="diplome" aria-hidden="true"></span>
+        </div>
+
+        <!-- À MODIFIER si tu veux : ajoute une phrase sur ce qui t'attire dans l'électronique -->
+        <div class="about-row">
+          <p class="about">
+          Étudiant en M1 Systèmes embarqués à l'ECE, je m'intéresse à l'électronique embarquée,
+          à l'instrumentation et au traitement du signal.
+          En dehors des cours : judo en compétition nationale, astronomie et astrophotographie.
+        </p>
+          <span class="pixel" data-pose="judo" aria-hidden="true"></span>
+        </div>
+
+        <div class="timeline-cols">
+          <div>
+            <h3 class="col-title">Formation</h3>
+            <ol class="timeline">
+              <li>
+                <span class="timeline-date">Sept. 2023 — aujourd'hui</span>
+                <h4>Cycle ingénieur, M1 Systèmes embarqués</h4>
+                <p class="timeline-place">ECE École d'ingénieurs, Paris · Programme Grande École</p>
+                <p>Électronique fondamentale, FPGA, microcontrôleurs, calcul embarqué, Linux embarqué,
+                  traitement du signal, électromagnétisme, programmation C/C++ et Python.
+                  Classé 1<sup>er</sup> sur 104 étudiants en 2025-2026.</p>
+              </li>
+              <li>
+                <span class="timeline-date">Sept. — déc. 2025</span>
+                <h4>Semestre de mobilité internationale</h4>
+                <p class="timeline-place">Ajou University, Suwon (Corée du Sud)</p>
+                <p>Algorithmique, circuits numériques, IT English, AI for Business.</p>
+              </li>
+              <li>
+                <span class="timeline-date">2020 — 2023</span>
+                <h4>Abitur (mention très bien) et baccalauréat (mention bien)</h4>
+                <p class="timeline-place">Lycée Saint-Sigisbert, Nancy</p>
+                <p>Double diplôme franco-allemand, spécialités mathématiques et physique-chimie.</p>
+              </li>
+            </ol>
+          </div>
+          <div>
+            <h3 class="col-title">Expériences &amp; engagements</h3>
+            <ol class="timeline">
+              <li>
+                <span class="timeline-date">Juin — juil. 2026</span>
+                <h4>Stage, outils Python pour l'ingénierie</h4>
+                <p class="timeline-place">SFE Process, Tomblaine · procédés hautes pressions et CO<sub>2</sub> supercritique</p>
+                <p>Outil de modélisation de données expérimentales (régressions linéaires et exponentielles)
+                  pour identifier les régimes de solubilité, d'interaction et de diffusion d'un procédé
+                  au CO<sub>2</sub> supercritique.</p>
+              </li>
+              <li>
+                <span class="timeline-date">Janv. — févr. 2025</span>
+                <h4>Stage ouvrier</h4>
+                <p class="timeline-place">SODEL Électricité, Nancy · installations courant fort et faible</p>
+                <p>Câblage, raccordement, contrôle et maintenance d'installations électriques.</p>
+              </li>
+              <li>
+                <span class="timeline-date">Févr. 2026 — aujourd'hui</span>
+                <h4>Vice-président de l'EQCE</h4>
+                <p class="timeline-place">Association de mathématiques et d'informatique quantique de l'ECE, Paris</p>
+                <p>Organisation d'événements scientifiques, conception et pilotage d'un parcours de 20 heures
+                  reliant les fondamentaux mathématiques à l'informatique quantique.</p>
+              </li>
+              <li>
+                <span class="timeline-date">Janv. 2025 — juin 2026</span>
+                <h4>Tuteur en mathématiques, physique et électronique</h4>
+                <p class="timeline-place">ECE Association de Tutorat, Lyon</p>
+                <p>Accompagnement individuel d'étudiants, avec des explications adaptées à leur niveau ;
+                  préparation et animation de séances collectives.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num">04</span>
+          <h2>Contact</h2>
+          <span class="pixel" data-pose="lettre" aria-hidden="true"></span>
+        </div>
+        <p class="contact-text">
+          Une question sur un projet, une idée à partager,
+          ou simplement envie de parler d'électronique ?
+        </p>
+        <p class="write-me">Écrivez-moi !
+          <svg viewBox="0 0 72 44" aria-hidden="true"><path d="M4 10C22 3 40 12 37 38"/><path d="M30 31l7 7 6-8"/></svg>
+        </p>
+        <a class="contact-email" href="mailto:pierre.hilaireau@edu.ece.fr">
+          <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M28 6H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-2.2 2L16 14.8 6.2 8zM4 24V8.9l11.4 7.9a1 1 0 0 0 1.2 0L28 8.9V24z"/></svg>
+          pierre.hilaireau@edu.ece.fr
+        </a>
+
+        <ul class="contact-links">
+          <li><a class="btn" href="https://www.linkedin.com/in/pierre-hilaireau/" target="_blank" rel="noopener">LinkedIn
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10v2H6v20h20V16h2v10a2 2 0 0 1-2 2z"/><path d="M20 2v2h6.6L18 12.6l1.4 1.4L28 5.4V12h2V2z"/></svg>
+          </a></li>
+          <li><a class="btn" href="https://github.com/PierreHlr" target="_blank" rel="noopener">GitHub
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10v2H6v20h20V16h2v10a2 2 0 0 1-2 2z"/><path d="M20 2v2h6.6L18 12.6l1.4 1.4L28 5.4V12h2V2z"/></svg>
+          </a></li>
+          <li><a class="btn" href="assets/cv/CV.pdf" target="_blank" rel="noopener">CV (PDF)
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 24v4H6v-4H4v4a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-4zM26 14l-1.4-1.4-7.6 7.6V2h-2v18.2l-7.6-7.6L6 14l10 10z"/></svg>
+          </a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Fait main · hébergé sur GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

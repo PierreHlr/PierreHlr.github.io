@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Neural Speech (PokECE) — Pierre Hilaireau</title>
+  <meta name="description" content="Neural Speech : reconnaissance vocale embarquée sur Arduino Due. Acquisition temps réel, filtre RIF, MFCC et réseau de neurones de 76 000 paramètres, dans un boîtier Pokéball imprimé en 3D.">
+
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="../index.html#projets">Projets</a>
+        <a href="../index.html#competences">Compétences</a>
+        <a href="../index.html#parcours">Parcours</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Basculer entre thème clair et sombre">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== EN-TÊTE DU PROJET ===================== -->
+    <section class="project-header">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projets">← Tous les projets</a>
+        <p class="eyebrow">Projet d'école · Janv. — mai 2026 · ECE Lyon</p>
+        <h1>Neural Speech</h1>
+        <p class="lead">
+          Un « Pokédex » des professeurs de l'école : on prononce un nom, et un Arduino Due
+          reconnaît le mot grâce à un réseau de neurones exécuté directement sur la carte.
+        </p>
+        <ul class="tags"><li>C/C++</li><li>Arduino Due</li><li>Traitement du signal</li><li>MFCC</li><li>CNN</li><li>PyTorch</li><li>KiCad</li></ul>
+
+        <div class="figure-row project-cover">
+          <figure>
+            <img src="../assets/img/projets/neural-speech/pokece-rendu.jpg" width="860" height="860"
+                 alt="Rendu 3D du boîtier en forme de Pokéball, gravé PokECE, posé sur son socle">
+            <figcaption>Le boîtier Pokéball du démonstrateur PokECE (rendu 3D).</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/projets/neural-speech/montage.jpg" width="1000" height="1000"
+                 alt="Montage sur plaque d'essai : trois LED avec leurs résistances et le module micro MAX9814">
+            <figcaption>Le montage : trois LED de résultat et le micro MAX9814.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <!-- ===================== FICHE TECHNIQUE ===================== -->
+      <aside class="datasheet" aria-label="Fiche technique">
+        <div class="datasheet-title"><span>Fiche technique</span><span>Rev A</span></div>
+        <dl>
+          <dt>Période</dt>
+          <dd>Janvier — mai 2026</dd>
+          <dt>Cadre</dt>
+          <dd>Projet d'électronique de 3<sup>e</sup> année (calcul embarqué), ECE Lyon</dd>
+          <dt>Équipe</dt>
+          <dd>4 étudiants</dd>
+          <dt>Cible</dt>
+          <dd>Arduino Due (SAM3X8E, Cortex-M3 à 84&nbsp;MHz)</dd>
+          <dt>Capteur</dt>
+          <dd>Micro MAX9814 à gain automatique</dd>
+          <dt>Modèle</dt>
+          <dd>CNN de 76&nbsp;000 paramètres, 3 mots, 2,2&nbsp;% d'erreur</dd>
+          <dt>Outils</dt>
+          <dd>C/C++, PlatformIO, Python, PyTorch, KiCad</dd>
+          <!-- Ajoute ici un lien vers le code si ton dépôt GitHub devient public -->
+        </dl>
+      </aside>
+
+      <!-- ===================== DESCRIPTION ===================== -->
+      <article class="prose">
+
+        <h2>Le projet</h2>
+        <p>
+          Neural Speech est le projet d'électronique de 3<sup>e</sup> année, mené en équipe de quatre.
+          L'objectif : reconnaître des mots prononcés, entièrement sur un Arduino Due, de l'acquisition
+          du micro jusqu'à la classification par un réseau de neurones. Le PC ne sert qu'à préparer
+          les données, entraîner le modèle hors ligne et afficher le résultat.
+        </p>
+        <p>
+          Notre cas d'usage, <strong>PokECE</strong>, en fait un Pokédex des professeurs de l'école :
+          l'utilisateur prononce le nom d'un professeur, la carte reconnaît le mot, allume la LED
+          correspondante et envoie le résultat à une interface sur PC qui affiche sa « fiche ».
+          Le tout tient dans un boîtier en forme de Pokéball, imprimé en 3D.
+        </p>
+
+        <h2>Chaîne de traitement</h2>
+        <p>
+          Le son capté par le micro traverse huit étapes, toutes calculées en temps réel
+          sur l'Arduino Due :
+        </p>
+        <ol class="chain">
+          <li><strong>Micro</strong><span>MAX9814 sur l'entrée A0, centré à mi-tension</span></li>
+          <li><strong>ADC 12 bits</strong><span>≈ 32 kHz, déclenché par le timer TC0</span></li>
+          <li><strong>Filtre RIF</strong><span>31 coefficients, passe-bas à 3,4 kHz</span></li>
+          <li><strong>Décimation</strong><span>Un échantillon sur 4, soit ≈ 8 kHz</span></li>
+          <li><strong>Frames</strong><span>256 échantillons, recouvrement de 50 %</span></li>
+          <li><strong>Spectre</strong><span>Pré-accentuation, fenêtre de Hamming, FFT 256</span></li>
+          <li><strong>MFCC</strong><span>26 filtres Mel, log, DCT : 13 coefficients</span></li>
+          <li><strong>CNN</strong><span>Reconnaît le mot, allume la LED associée</span></li>
+        </ol>
+        <p>
+          Chaque seconde de voix devient ainsi une matrice de 62 frames × 13 coefficients MFCC,
+          qui décrit le timbre du signal au cours du temps :
+        </p>
+        <figure>
+          <img src="../assets/img/projets/neural-speech/mfcc.jpg" width="1400" height="735" loading="lazy"
+               alt="Carte de chaleur des 13 coefficients MFCC en fonction du temps sur une seconde">
+          <figcaption>Les 13 MFCC calculés par la carte, frame par frame, sur une seconde de signal.</figcaption>
+        </figure>
+
+        <h2>Filtrage en temps réel</h2>
+        <p>
+          Le filtre RIF travaille en virgule fixe (format Q12) sur un buffer circulaire : à chaque
+          nouvel échantillon, il calcule une convolution de 31 produits, puis la décimation ne garde
+          qu'un échantillon sur quatre. Mesuré sur la carte, ce traitement prend 12&nbsp;µs par
+          échantillon, alors que le budget entre deux échantillons est de 31&nbsp;µs.
+        </p>
+        <figure>
+<pre><code><span class="c-comment">// Filtre RIF sur buffer circulaire, puis décimation par 4</span>
+<span class="c-keyword">bool</span> processStreamingSample(uint16_t adcValue, uint16_t &amp;decimatedSample) {
+  <span class="c-keyword">const</span> int16_t centered = <span class="c-keyword">static_cast</span>&lt;int16_t&gt;(adcValue) - ADC_CENTER;
+  firRingBuffer[firWriteIndex] = centered;
+
+  int32_t accumulator = 0;
+  size_t readIndex = firWriteIndex;
+  <span class="c-keyword">for</span> (size_t tap = 0; tap &lt; FIR_TAP_COUNT; ++tap) {
+    accumulator += <span class="c-keyword">static_cast</span>&lt;int32_t&gt;(firCoefficients[tap]) *
+                   <span class="c-keyword">static_cast</span>&lt;int32_t&gt;(firRingBuffer[readIndex]);
+    readIndex = (readIndex == 0) ? FIR_TAP_COUNT - 1 : readIndex - 1;
+  }
+  firWriteIndex = (firWriteIndex + 1) % FIR_TAP_COUNT;
+
+  <span class="c-comment">// Un échantillon de sortie tous les 4 échantillons d'entrée</span>
+  <span class="c-keyword">if</span> ((++inputSampleCount % DECIMATION_FACTOR) != 0) <span class="c-keyword">return false</span>;
+  <span class="c-comment">// … mise à l'échelle Q12 et écriture de decimatedSample</span>
+  <span class="c-keyword">return true</span>;
+}</code></pre>
+          <figcaption>Extrait simplifié de <code>src/ET3.cpp</code>.</figcaption>
+        </figure>
+
+        <h2>Réseau de neurones embarqué</h2>
+        <p>
+          Le réseau est entraîné sur PC avec PyTorch, à partir d'un jeu de données de 314 enregistrements
+          construit par l'équipe. Ses poids sont ensuite exportés dans un en-tête C autonome, qui contient
+          aussi les paramètres de standardisation et le code d'inférence exécuté par l'Arduino :
+        </p>
+<pre><code>Entrée 62×13 MFCC
+ → Conv 5×3, 8 filtres, ReLU  → MaxPool 2×1   (31×13×8)
+ → Conv 3×3, 12 filtres, ReLU → MaxPool 2×1   (15×13×12)
+ → Dense 2340 → 32, ReLU
+ → Dense 32 → 3, softmax</code></pre>
+        <figure>
+          <img src="../assets/img/projets/neural-speech/entrainement-cnn.jpg" width="1400" height="780" loading="lazy"
+               alt="Courbes d'erreur quadratique moyenne en entraînement et en test, qui chutent en quelques époques">
+          <figcaption>Erreur quadratique moyenne pendant l'entraînement du CNN final (entraînement et test).</figcaption>
+        </figure>
+        <p>
+          Avant l'inférence, un contrôle de niveau (valeur efficace et crête) écarte les captures trop
+          faibles : le système répond alors « Inconnu » plutôt que de deviner.
+        </p>
+
+        <h2>Fonctionnalités avancées</h2>
+        <ul>
+          <li>
+            <strong>Trois mots au lieu de deux.</strong> Le cahier des charges demandait d'en reconnaître
+            au moins deux. Avec trois mots, l'erreur est même passée de 3,3&nbsp;% (2 sur 60)
+            à 2,2&nbsp;% (2 sur 90).
+          </li>
+          <li>
+            <strong>Déclenchement automatique à la voix.</strong> Avec le bouton, il fallait synchroniser
+            l'appui et la parole. La carte écoute désormais en continu : elle compare le niveau moyen
+            du signal, sur des fenêtres d'environ 10&nbsp;ms, à un seuil qui s'adapte au bruit de fond,
+            et ne se déclenche qu'après plusieurs fenêtres consécutives au-dessus du seuil. Un
+            pré-enregistrement de 150&nbsp;ms évite de couper le début du mot.
+          </li>
+        </ul>
+
+        <h2>Tests et résultats</h2>
+        <p>
+          Le projet est construit en étapes successives, chacune validée par un test sur la carte
+          avant de passer à la suivante :
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Étape</th><th>Objectif</th><th>Mesuré</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Échantillonnage</td><td class="num">≈ 32 kHz</td><td class="num ok">31 987,81 Hz</td></tr>
+              <tr><td>Filtre anti-repliement</td><td class="num">≥ 30 dB dès 4 kHz</td><td class="num ok">−34,96 dB à 4 kHz<br>−88,92 dB à 8 kHz</td></tr>
+              <tr><td>Temps de filtrage</td><td class="num">&lt; 31 µs</td><td class="num ok">12 µs</td></tr>
+              <tr><td>Découpage en frames</td><td class="num">256, recouvrement 50 %</td><td class="num ok">62 frames, sans erreur</td></tr>
+              <tr><td>Entraînement (MSE en test)</td><td class="num">&lt; 0,05</td><td class="num ok">3,3 × 10<sup>−4</sup></td></tr>
+              <tr><td>Jeu de données</td><td class="num">≥ 100 éléments</td><td class="num ok">314 captures</td></tr>
+              <tr><td>Classification</td><td class="num">&lt; 10 % d'erreur</td><td class="num ok">2,2 % (2 sur 90)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure>
+          <img src="../assets/img/projets/neural-speech/oscilloscope-1khz.jpg" width="1400" height="1050" loading="lazy"
+               alt="Oscilloscope : sinus de 1 kHz en jaune et sa version échantillonnée en marches d'escalier en violet">
+          <figcaption>Première étape : un sinus de 1 kHz en entrée (jaune) et le signal échantillonné restitué par le DAC (violet).</figcaption>
+        </figure>
+
+        <h2>Matériel et boîtier</h2>
+        <ul>
+          <li>Arduino Due, imposé par le cahier des charges ;</li>
+          <li>module micro MAX9814, avec préamplificateur à gain automatique, sur l'entrée A0 ;</li>
+          <li>trois LED de résultat protégées par des résistances de 220&nbsp;Ω ;</li>
+          <li>un bouton poussoir pour lancer une acquisition manuelle ;</li>
+          <li>un schéma électronique réalisé sous KiCad ;</li>
+          <li>un boîtier en forme de Pokéball, imprimé en 3D.</li>
+        </ul>
+        <figure>
+          <img src="../assets/img/projets/neural-speech/impression-3d.jpg" width="1200" height="626" loading="lazy"
+               alt="Demi-coque blanche de la Pokéball en cours d'impression sur une imprimante 3D">
+          <figcaption>Impression d'une demi-coque du boîtier.</figcaption>
+        </figure>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projets">← Retour aux projets</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Fait main · hébergé sur GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>
