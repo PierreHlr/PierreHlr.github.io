@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- VERSION ANGLAISE de projets/carte-nfc.html -->
+  <title>NFC business card — Pierre Hilaireau</title>
+  <meta name="description" content="A business card on a printed circuit board that opens my portfolio when tapped with a phone: NTAG213F NFC chip, 4-turn etched antenna designed by calculation, KiCad design and JLCPCB manufacturing.">
+  <link rel="alternate" hreflang="fr" href="https://pierrehlr.github.io/projets/carte-nfc.html">
+  <link rel="alternate" hreflang="en" href="https://pierrehlr.github.io/en/projects/nfc-business-card.html">
+
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#skills">Skills</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#hobbies">Hobbies</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="lang-switch" href="../../projets/carte-nfc.html" hreflang="fr" lang="fr" title="Version française">FR</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="content">
+
+    <section class="project-header">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <p class="eyebrow">Project · Sept. 2026 · Personal project</p>
+        <h1>NFC business card</h1>
+        <p class="lead">
+          A business card that is also a printed circuit board: tap it with a phone and it opens
+          this portfolio. No battery, no app, no microcontroller. The antenna is etched into the PCB
+          and was designed by calculation, since there was no instrument to measure it.
+        </p>
+        <ul class="tags"><li>KiCad</li><li>NFC 13.56&nbsp;MHz</li><li>Printed antenna</li><li>Python</li><li>JLCPCB</li></ul>
+
+        <figure class="project-cover">
+          <img src="../../assets/img/projets/carte-nfc/rendu-3d.jpg" width="1200" height="750"
+               alt="KiCad 3D render of the card, QR code side: black solder mask, four antenna turns around the edge, QR code and the text “Tap your phone or scan”">
+        </figure>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <aside class="datasheet" aria-label="Datasheet">
+        <div class="datasheet-title"><span>Datasheet</span><span>Rev A</span></div>
+        <dl>
+          <dt>Period</dt>
+          <dd>September 2026</dd>
+          <dt>Context</dt>
+          <dd>Personal project</dd>
+          <dt>Chip</dt>
+          <dd>NXP NTAG213F (NFC Forum Type 2, ISO/IEC 14443 A)</dd>
+          <dt>Antenna</dt>
+          <dd>4 etched turns, 80 × 48&nbsp;mm, 2.24&nbsp;µH</dd>
+          <dt>Card</dt>
+          <dd>Bank-card format (85.6 × 54&nbsp;mm), FR-4 0.8&nbsp;mm, black solder mask, ENIG finish</dd>
+          <dt>Tools</dt>
+          <dd>KiCad 10, Python, JLCPCB manufacturing and assembly</dd>
+          <dt>Status</dt>
+          <dd>5 assembled cards ordered, measurements to come</dd>
+          <dt>Links</dt>
+          <dd><a href="https://github.com/PierreHlr/nfc-business-card" target="_blank" rel="noopener">KiCad files and calculations (GitHub)</a></dd>
+        </dl>
+      </aside>
+
+      <article class="prose">
+
+        <h2>Requirements</h2>
+        <p>
+          The goal: anyone should reach my portfolio just by holding their phone near the card.
+          I set the requirements before drawing anything:
+        </p>
+        <ul>
+          <li>fully passive: no battery, no power supply, no microcontroller;</li>
+          <li>read by common NFC phones (iPhone XS and newer, Android), with no app;</li>
+          <li>read distance of at least 2&nbsp;cm, 3&nbsp;cm targeted;</li>
+          <li>content protected against rewriting;</li>
+          <li>a fallback QR code for phones without NFC;</li>
+          <li>the size of a bank card, to fit in a wallet.</li>
+        </ul>
+
+        <h2>Principle: a 13.56&nbsp;MHz transformer</h2>
+        <p>
+          At 13.56&nbsp;MHz the wavelength is 22&nbsp;m, so a phone a few centimetres away is deep in the
+          near field: nothing is really “radiated”. The phone's coil and the card's antenna behave like
+          the primary and secondary of a loosely coupled air-core transformer.
+        </p>
+        <ul>
+          <li><strong>Power</strong>: the phone's field induces a voltage in the antenna (Faraday's law).
+            The chip rectifies it to power itself.</li>
+          <li><strong>Answer</strong>: the chip modulates its own load. The phone senses this change
+            through the mutual inductance, and decodes it.</li>
+        </ul>
+        <p>
+          At the minimum field allowed by ISO/IEC 14443 (1.5&nbsp;A/m), the card's antenna only produces
+          2.0&nbsp;V rms open-circuit. Resonance is what multiplies this voltage, so the whole project
+          rests on sizing the antenna correctly.
+        </p>
+
+        <h2>Choosing the chip</h2>
+        <p>
+          The first candidate, the NXP NTAG213, is only sold as bare wafers or modules for card
+          manufacturers: a PCB assembler cannot solder it. Its sibling, the NTAG213F, has the same memory
+          (144&nbsp;bytes) and the same input capacitance (50&nbsp;pF), but comes in a solderable
+          2.0 × 1.5&nbsp;mm HXSON4 package, stocked by JLCPCB.
+        </p>
+        <p>
+          The “F” adds a field-detect output (FD), meant to wake up a microcontroller.
+          Without a microcontroller, the datasheet requires two precautions:
+        </p>
+        <ul>
+          <li>FD must not float: it is tied to the chip's ground. In return, the sleep mode
+            (<code>SLEEP_EN</code>) must never be enabled during programming, or the card would
+            become invisible;</li>
+          <li>the exposed pad stays unconnected: it is soldered for mechanical strength only.</li>
+        </ul>
+
+        <h2>Schematic</h2>
+        <p>
+          The schematic has three elements: the antenna, the chip, and two footprints for tuning
+          capacitors, left empty at assembly.
+        </p>
+        <figure class="figure-svg">
+          <svg viewBox="0 0 720 300" role="img" aria-labelledby="schematic-title">
+            <title id="schematic-title">Schematic: antenna AE1, unpopulated capacitors C1 and C2 and chip U1 are in parallel between nets LB and LA; FD is tied to GND and the exposed pad EP is not connected.</title>
+            <!-- Rails LB (haut) et LA (bas), qui relient les trois composants en parallèle -->
+            <path class="fil" d="M100,100 V60 H500 M100,200 V240 H500"/>
+            <text class="t-aide" x="160" y="50">LB</text>
+            <text class="t-aide" x="160" y="264">LA</text>
+            <!-- AE1 : l'antenne, une bobine en cuivre -->
+            <path class="cuivre" d="M100,100 a12.5,12.5 0 0 1 0,25 a12.5,12.5 0 0 1 0,25 a12.5,12.5 0 0 1 0,25 a12.5,12.5 0 0 1 0,25"/>
+            <text class="t-ref" x="128" y="136">AE1</text>
+            <text class="t-aide" x="128" y="156">antenna</text>
+            <text class="t-aide" x="128" y="176">2.24 µH</text>
+            <!-- C1 et C2 : condensateurs d'accord, non montés (DNP) -->
+            <path class="fil dnp" d="M240,60 V142 M222,142 H258 M222,158 H258 M240,158 V240"/>
+            <text class="t-ref" x="268" y="146">C1</text>
+            <text class="t-aide" x="268" y="166">DNP</text>
+            <path class="fil dnp" d="M350,60 V142 M332,142 H368 M332,158 H368 M350,158 V240"/>
+            <text class="t-ref" x="378" y="146">C2</text>
+            <text class="t-aide" x="378" y="166">DNP</text>
+            <circle class="noeud" cx="240" cy="60" r="4"/>
+            <circle class="noeud" cx="240" cy="240" r="4"/>
+            <circle class="noeud" cx="350" cy="60" r="4"/>
+            <circle class="noeud" cx="350" cy="240" r="4"/>
+            <!-- U1 : la puce NTAG213F et ses broches -->
+            <rect class="fil" x="500" y="30" width="140" height="240"/>
+            <text class="t-aide" x="484" y="52" text-anchor="middle">2</text>
+            <text class="t-aide" x="484" y="232" text-anchor="middle">4</text>
+            <text x="510" y="65">LB</text>
+            <text x="510" y="245">LA</text>
+            <text class="t-ref" x="570" y="140" text-anchor="middle">U1</text>
+            <text class="t-aide" x="570" y="162" text-anchor="middle">NTAG213F</text>
+            <path class="fil" d="M640,100 H670 M640,160 H670 M640,220 H670"/>
+            <text x="630" y="105" text-anchor="end">GND</text>
+            <text x="630" y="165" text-anchor="end">FD</text>
+            <text x="630" y="225" text-anchor="end">EP</text>
+            <text class="t-aide" x="655" y="92" text-anchor="middle">1</text>
+            <text class="t-aide" x="655" y="152" text-anchor="middle">3</text>
+            <text class="t-aide" x="655" y="212" text-anchor="middle">5</text>
+            <!-- FD reliée à GND ; EP non connecté (croix) -->
+            <path class="fil" d="M670,100 H690 V160 H670"/>
+            <path class="fil" d="M664,214 L676,226 M676,214 L664,226"/>
+          </svg>
+          <figcaption>Card schematic. C1 and C2 (0603, C0G) are not placed by the assembler (DNP): they are for tuning and are soldered by hand.</figcaption>
+        </figure>
+
+        <h2>Sizing the antenna</h2>
+        <p>
+          The antenna and the chip's input capacitance form a parallel LC circuit. The chip receives
+          the highest voltage when this circuit resonates at the carrier frequency:
+        </p>
+<pre><code><i>f</i><sub>0</sub> = 1 / (2π·√(<i>L</i>·<i>C</i><sub>tot</sub>))
+<i>C</i><sub>tot</sub> = <i>C</i><sub>chip</sub> + <i>C</i><sub>parasitic</sub> + <i>C</i><sub>tuning</sub></code></pre>
+        <p>
+          I aimed <strong>slightly above</strong> 13.56&nbsp;MHz, between 14 and 15&nbsp;MHz, for two reasons.
+          A tuning capacitor can only add capacitance, so it can only lower the frequency: an antenna that
+          resonates too high can be corrected, one that resonates too low means a new PCB. And the phone
+          itself detunes the card, differently for each model: the best tuning is found by measurement.
+          With the chip's 50&nbsp;pF, this calls for an inductance of 2.1 to 2.6&nbsp;µH.
+        </p>
+        <p>
+          The antenna runs around the card (80 × 48&nbsp;mm), like the antenna of a contactless bank card,
+          which every phone is designed to read. There is no copper area inside it: eddy currents in
+          such an area would oppose the field.
+        </p>
+
+        <h2>Two independent calculations</h2>
+        <p>
+          Without a network analyser, the inductance could not be measured before ordering. To be able to
+          trust the calculation, I used two methods that share no assumption, and only accepted a geometry
+          when they agreed:
+        </p>
+        <ul>
+          <li><strong>Greenhouse method</strong>: the spiral is cut into its 16 straight segments.
+            The total inductance is the sum of every segment's self-inductance and of the mutual inductance
+            of every pair of parallel segments, obtained by integrating the Neumann formula exactly.
+            The code was validated on a 50&nbsp;mm square loop: 210.6&nbsp;nH, against 210.5&nbsp;nH for
+            the closed-form formula.</li>
+          <li><strong>Empirical formula</strong> for printed antennas, from STMicroelectronics
+            application note AN2972.</li>
+        </ul>
+        <figure>
+<pre><code><span class="c-keyword">def</span> _g(u, d):
+    <span class="c-keyword">return</span> u * math.asinh(u / d) - math.sqrt(u * u + d * d)
+
+
+<span class="c-keyword">def</span> mutual_parallel(a1, b1, a2, b2, d):
+    <span class="c-comment">"""Exact mutual inductance of two parallel filaments.
+
+    Filament 1 spans [a1, b1], filament 2 spans [a2, b2] along the same axis,
+    distance d apart. Obtained by integrating the Neumann formula.
+    """</span>
+    <span class="c-keyword">return</span> MU0 / (4 * math.pi) * (
+        _g(b1 - a2, d) - _g(a1 - a2, d) - _g(b1 - b2, d) + _g(a1 - b2, d)
+    )</code></pre>
+          <figcaption>Mutual inductance of two parallel segments, from <code>calc/antenna.py</code> (Python, no external library).</figcaption>
+        </figure>
+        <p>Both methods were then used to choose the number of turns and the trace width:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Turns</th><th>Trace</th><th><i>L</i> Greenhouse</th><th><i>L</i> empirical</th><th>Untuned resonance</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">1.0&nbsp;mm</td><td class="num">1.44&nbsp;µH</td><td class="num">1.34&nbsp;µH</td><td class="num">18.3&nbsp;MHz</td></tr>
+              <tr><td class="num">4</td><td class="num">0.5&nbsp;mm</td><td class="num">2.70&nbsp;µH</td><td class="num">2.67&nbsp;µH</td><td class="num">13.4&nbsp;MHz</td></tr>
+              <tr><td class="num">4</td><td class="num">0.8&nbsp;mm</td><td class="num">2.40&nbsp;µH</td><td class="num">2.35&nbsp;µH</td><td class="num">14.2&nbsp;MHz</td></tr>
+              <tr><td class="num ok">4</td><td class="num ok">1.0&nbsp;mm</td><td class="num ok">2.24&nbsp;µH</td><td class="num ok">2.18&nbsp;µH</td><td class="num ok">14.7&nbsp;MHz</td></tr>
+              <tr><td class="num">5</td><td class="num">1.0&nbsp;mm</td><td class="num">3.11&nbsp;µH</td><td class="num">3.15&nbsp;µH</td><td class="num">12.5&nbsp;MHz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          With 3 turns, the resonance is far too high. With 5 turns, or with 0.5&nbsp;mm traces, it is
+          already below the carrier, where no capacitor could bring it back up. 4 turns of 1.0&nbsp;mm land
+          in the target window with the widest traces, hence the lowest resistance. The two methods agree
+          within 2.5&nbsp;%: I kept <i>L</i> = 2.24&nbsp;µH.
+        </p>
+        <p>
+          Trace width really matters: at 13.56&nbsp;MHz the skin effect confines the current to about
+          18&nbsp;µm, half the copper thickness. A first draft of the footprint had 0.2&nbsp;mm traces:
+          five times more resistance (2.3&nbsp;Ω at DC) and a resonance already at 14.0&nbsp;MHz, leaving
+          almost no margin for tuning. With 1.0&nbsp;mm, the resistance drops to 0.72&nbsp;Ω at
+          13.56&nbsp;MHz, for an unloaded quality factor of about 265.
+        </p>
+
+        <h2>Tuning without a network analyser</h2>
+        <p>
+          With <i>L</i> = 2.24&nbsp;µH and 52.5&nbsp;pF in total (50&nbsp;pF for the chip, about 2.5&nbsp;pF
+          of parasitic capacitance between turns and on the pads), the card resonates at 14.7&nbsp;MHz with
+          no capacitor. About 9&nbsp;pF more brings it down to 13.56&nbsp;MHz.
+        </p>
+        <figure class="figure-svg">
+          <svg viewBox="0 0 720 380" role="img" aria-labelledby="tuning-title">
+            <title id="tuning-title">Resonance frequency versus tuning capacitance: 14.7 MHz with no capacitor, 13.56 MHz reached at about 9 pF, 12.9 MHz at 15 pF.</title>
+            <!-- Grille et axes (échelle : 41,7 px par pF, 115,4 px par MHz) -->
+            <path class="grille" d="M64,262.3 H690 M64,204.6 H690 M64,146.9 H690 M64,89.2 H690 M64,31.5 H690"/>
+            <path class="axe" d="M64,320 H690 M64,320 v5 M189.2,320 v5 M314.4,320 v5 M439.6,320 v5 M564.8,320 v5 M690,320 v5"/>
+            <g class="t-aide" text-anchor="end">
+              <text x="56" y="324">12.5</text><text x="56" y="266.3">13.0</text><text x="56" y="208.6">13.5</text>
+              <text x="56" y="150.9">14.0</text><text x="56" y="93.2">14.5</text><text x="56" y="35.5">15.0</text>
+            </g>
+            <g class="t-aide" text-anchor="middle">
+              <text x="64" y="342">0</text><text x="189.2" y="342">3</text><text x="314.4" y="342">6</text>
+              <text x="439.6" y="342">9</text><text x="564.8" y="342">12</text><text x="690" y="342">15</text>
+              <text x="377" y="370">Added tuning capacitance C1 + C2 (pF)</text>
+            </g>
+            <text class="t-aide" x="8" y="14">Resonance frequency (MHz)</text>
+            <!-- Zone teintée : effet d'une erreur de ±5 % sur L -->
+            <path class="bande" d="M64,24.9 L84.9,33.1 L105.7,41.2 L126.6,49.2 L147.5,57.1 L168.3,64.8 L189.2,72.5 L210.1,80.1 L230.9,87.5 L251.8,94.9 L272.7,102.2 L293.5,109.3 L314.4,116.4 L335.3,123.4 L356.1,130.3 L377,137.1 L397.9,143.8 L418.7,150.5 L439.6,157.1 L460.5,163.5 L481.3,169.9 L502.2,176.3 L523.1,182.5 L543.9,188.7 L564.8,194.8 L585.7,200.9 L606.5,206.8 L627.4,212.7 L648.3,218.6 L669.1,224.3 L690,230.1 L690,304.8 L669.1,299.4 L648.3,293.9 L627.4,288.4 L606.5,282.8 L585.7,277.1 L564.8,271.3 L543.9,265.5 L523.1,259.6 L502.2,253.7 L481.3,247.7 L460.5,241.6 L439.6,235.4 L418.7,229.2 L397.9,222.8 L377,216.4 L356.1,210 L335.3,203.4 L314.4,196.7 L293.5,190 L272.7,183.2 L251.8,176.3 L230.9,169.3 L210.1,162.2 L189.2,155 L168.3,147.7 L147.5,140.3 L126.6,132.8 L105.7,125.2 L84.9,117.5 L64,109.7 Z"/>
+            <!-- Porteuse NFC à 13,56 MHz et point d'accord (≈ 9 pF) -->
+            <path class="repere" d="M64,197.7 H690 M439.6,203.7 V320"/>
+            <circle class="repere" cx="439.6" cy="197.7" r="6"/>
+            <text x="72" y="218">13.56 MHz · NFC carrier</text>
+            <text x="448" y="312">≈ 9 pF</text>
+            <!-- f0 = 1 / (2π √(L (52,5 pF + C))), L = 2,24 µH -->
+            <path class="courbe" d="M64,68.9 L84.9,76.9 L105.7,84.8 L126.6,92.6 L147.5,100.3 L168.3,107.8 L189.2,115.3 L210.1,122.7 L230.9,129.9 L251.8,137.1 L272.7,144.2 L293.5,151.2 L314.4,158.1 L335.3,164.9 L356.1,171.6 L377,178.3 L397.9,184.8 L418.7,191.3 L439.6,197.7 L460.5,204 L481.3,210.3 L502.2,216.4 L523.1,222.5 L543.9,228.6 L564.8,234.5 L585.7,240.4 L606.5,246.2 L627.4,252 L648.3,257.7 L669.1,263.3 L690,268.9"/>
+            <text x="78" y="58">14.7 MHz with no capacitor</text>
+            <!-- Valeurs normalisées de condensateurs (le survol affiche la valeur) -->
+            <g class="mesure"><title>0 pF → 14.67 MHz</title><circle class="zone" cx="64" cy="68.9" r="12"/><circle class="point" cx="64" cy="68.9" r="4.5"/></g>
+            <g class="mesure"><title>2.2 pF → 14.38 MHz</title><circle class="zone" cx="155.8" cy="103.3" r="12"/><circle class="point" cx="155.8" cy="103.3" r="4.5"/></g>
+            <g class="mesure"><title>3.3 pF → 14.23 MHz</title><circle class="zone" cx="201.7" cy="119.7" r="12"/><circle class="point" cx="201.7" cy="119.7" r="4.5"/></g>
+            <g class="mesure"><title>4.7 pF → 14.06 MHz</title><circle class="zone" cx="260.1" cy="140" r="12"/><circle class="point" cx="260.1" cy="140" r="4.5"/></g>
+            <g class="mesure"><title>6.8 pF → 13.81 MHz</title><circle class="zone" cx="347.8" cy="168.9" r="12"/><circle class="point" cx="347.8" cy="168.9" r="4.5"/></g>
+            <g class="mesure"><title>8.2 pF → 13.65 MHz</title><circle class="zone" cx="406.2" cy="187.4" r="12"/><circle class="point" cx="406.2" cy="187.4" r="4.5"/></g>
+            <g class="mesure"><title>10 pF → 13.45 MHz</title><circle class="zone" cx="481.3" cy="210.3" r="12"/><circle class="point" cx="481.3" cy="210.3" r="4.5"/></g>
+            <g class="mesure"><title>12 pF → 13.24 MHz</title><circle class="zone" cx="564.8" cy="234.5" r="12"/><circle class="point" cx="564.8" cy="234.5" r="4.5"/></g>
+            <g class="mesure"><title>15 pF → 12.94 MHz</title><circle class="zone" cx="690" cy="268.9" r="12"/><circle class="point" cx="690" cy="268.9" r="4.5"/></g>
+          </svg>
+          <figcaption>Resonance frequency versus added tuning capacitance. The dots are standard capacitor values; the shaded area shows the effect of a ±5&nbsp;% error on the inductance.</figcaption>
+        </figure>
+        <p>
+          A 5&nbsp;% error on <i>L</i> or on the chip capacitance moves the untuned resonance between
+          14.3 and 15.1&nbsp;MHz: in every case the card stays above the carrier and can be tuned down.
+        </p>
+        <p>
+          Without a network analyser, the resonance itself cannot be measured. What matters to the user,
+          however, can be measured with a phone and a ruler: the maximum read distance. The card therefore
+          has two 0603 footprints in parallel with the antenna, empty at assembly. Each of the five
+          prototypes will get a different value, and the one that reads furthest across several phones
+          will be kept:
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Prototype</th><th>C1 + C2</th><th>Calculated resonance</th><th>Read distance</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0</td><td class="num">14.67&nbsp;MHz</td><td>To be measured</td></tr>
+              <tr><td class="num">2</td><td class="num">3.3&nbsp;pF</td><td class="num">14.23&nbsp;MHz</td><td>To be measured</td></tr>
+              <tr><td class="num">3</td><td class="num">6.8&nbsp;pF</td><td class="num">13.81&nbsp;MHz</td><td>To be measured</td></tr>
+              <tr><td class="num">4</td><td class="num">8.2&nbsp;pF</td><td class="num">13.65&nbsp;MHz</td><td>To be measured</td></tr>
+              <tr><td class="num">5</td><td class="num">10&nbsp;pF</td><td class="num">13.45&nbsp;MHz</td><td>To be measured</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Layout and manufacturing</h2>
+        <p>
+          A coil is a problem for KiCad: at DC it is a short circuit between its two ends, so a design rule
+          check (DRC) error if it is drawn as tracks. The antenna is therefore a separate footprint, drawn
+          with 16 copper lines and declared as a <i>net tie</i>: KiCad then knows the short is intentional.
+        </p>
+        <ul>
+          <li>the outer end of the spiral comes back inside through a bridge on the back layer,
+            under the four turns;</li>
+          <li>the chip is rotated by 180° and the capacitors by 90°: every LB terminal ends up at the top,
+            every LA terminal at the bottom, and the routing comes down to two parallel rails;</li>
+          <li>no ground plane and no copper pour: nothing must disturb the field inside the loop.</li>
+        </ul>
+        <div class="figure-row">
+          <figure>
+            <img src="../../assets/img/projets/carte-nfc/recto.jpg" width="1200" height="788" loading="lazy"
+                 alt="Front of the card: “Pierre HILAIREAU”, “Embedded systems student” and e-mail address in white on black">
+            <figcaption>Front: name, title and e-mail in white silkscreen.</figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/img/projets/carte-nfc/verso.jpg" width="1200" height="788" loading="lazy"
+                 alt="Back of the card: QR code in the centre, chip and capacitors on the left, four antenna turns around the edge">
+            <figcaption>Back: QR code, chip and tuning footprints; the turns show through the mask.</figcaption>
+          </figure>
+        </div>
+        <p>
+          The cards are manufactured and assembled by JLCPCB: 0.8&nbsp;mm FR-4, black solder mask,
+          white silkscreen and ENIG (gold) finish, which also gives flat pads for the chip's 0.25&nbsp;mm
+          pins. Only the chip is placed by the assembler; the tuning capacitors will be soldered by hand.
+        </p>
+
+        <h2>Data and QR code</h2>
+        <p>
+          The phone opens the link through an NDEF URI record. The <code>https://</code> prefix is not
+          stored as text but as a single byte: the whole message fits in 28&nbsp;bytes, 19&nbsp;% of the
+          chip's 144&nbsp;bytes.
+        </p>
+        <p>
+          The fallback QR code holds the same address in upper case (<code>HTTPS://PIERREHLR.GITHUB.IO/</code>).
+          Scheme and host names are case-insensitive, and upper case enables the alphanumeric mode:
+          11&nbsp;bits per pair of characters instead of 16. The code then fits in 25 × 25 modules instead of
+          29 × 29; at 17.5&nbsp;mm wide, each module measures 0.70&nbsp;mm, well above the silkscreen
+          resolution. It is printed as a knockout (white silkscreen for the background, black mask for the
+          modules): otherwise the code would come out inverted, and many scanners would reject it.
+        </p>
+
+        <h2>Next steps</h2>
+        <p>The five assembled cards are on order. The next steps:</p>
+        <ul>
+          <li>measure the untuned read distance with several phones (iPhone and Android);</li>
+          <li>try the capacitor values on the five prototypes, and keep the one with the best
+            worst-case distance;</li>
+          <li>write the URL with NXP TagWriter, check the message with NXP TagInfo, then write-lock the chip.</li>
+        </ul>
+        <p>The measured distances will complete the tuning table above.</p>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projects">← Back to projects</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Handmade · hosted on GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

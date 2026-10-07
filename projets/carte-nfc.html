@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Carte de visite NFC — Pierre Hilaireau</title>
+  <meta name="description" content="Carte de visite en circuit imprimé qui ouvre mon portfolio au contact d'un téléphone : puce NFC NTAG213F, antenne gravée de 4 spires dimensionnée par le calcul, conception sous KiCad et fabrication JLCPCB.">
+  <link rel="alternate" hreflang="fr" href="https://pierrehlr.github.io/projets/carte-nfc.html">
+  <link rel="alternate" hreflang="en" href="https://pierrehlr.github.io/en/projects/nfc-business-card.html">
+
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;800&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <script src="../js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="../index.html">Pierre Hilaireau</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="../index.html#projets">Projets</a>
+        <a href="../index.html#competences">Compétences</a>
+        <a href="../index.html#parcours">Parcours</a>
+        <a href="../index.html#loisirs">Loisirs</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <a class="lang-switch" href="../en/projects/nfc-business-card.html" hreflang="en" lang="en" title="English version">EN</a>
+      <button class="theme-toggle" type="button" aria-label="Basculer entre thème clair et sombre">
+        <svg class="icon-moon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.5 5.1A11 11 0 1 0 26.9 18.5 9 9 0 0 1 13.5 5.1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/><path transform="rotate(45 16 16)" d="M15 2h2v5h-2zM15 25h2v5h-2zM2 15h5v2H2zM25 15h5v2h-5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== EN-TÊTE DU PROJET ===================== -->
+    <section class="project-header">
+      <div class="container">
+        <span class="pixel pixel-project" data-pose="repos" aria-hidden="true"></span>
+        <a class="back-link" href="../index.html#projets">← Tous les projets</a>
+        <p class="eyebrow">Projet · Sept. 2026 · Projet personnel</p>
+        <h1>Carte de visite NFC</h1>
+        <p class="lead">
+          Une carte de visite qui est aussi un circuit imprimé : on l'approche d'un téléphone,
+          et elle ouvre ce portfolio. Ni pile, ni application, ni microcontrôleur.
+          L'antenne est gravée dans le PCB et a été dimensionnée par le calcul,
+          faute d'instrument pour la mesurer.
+        </p>
+        <ul class="tags"><li>KiCad</li><li>NFC 13,56&nbsp;MHz</li><li>Antenne imprimée</li><li>Python</li><li>JLCPCB</li></ul>
+
+        <figure class="project-cover">
+          <img src="../assets/img/projets/carte-nfc/rendu-3d.jpg" width="1200" height="750"
+               alt="Rendu 3D KiCad de la carte, face QR code : vernis noir, quatre spires d'antenne sur le pourtour, QR code et texte « Tap your phone or scan »">
+        </figure>
+      </div>
+    </section>
+
+    <div class="container project-layout">
+
+      <!-- ===================== FICHE TECHNIQUE ===================== -->
+      <aside class="datasheet" aria-label="Fiche technique">
+        <div class="datasheet-title"><span>Fiche technique</span><span>Rev A</span></div>
+        <dl>
+          <dt>Période</dt>
+          <dd>Septembre 2026</dd>
+          <dt>Cadre</dt>
+          <dd>Projet personnel</dd>
+          <dt>Puce</dt>
+          <dd>NXP NTAG213F (NFC Forum Type 2, ISO/IEC 14443 A)</dd>
+          <dt>Antenne</dt>
+          <dd>4 spires gravées, 80 × 48&nbsp;mm, 2,24&nbsp;µH</dd>
+          <dt>Carte</dt>
+          <dd>Format carte bancaire (85,6 × 54&nbsp;mm), FR-4 0,8&nbsp;mm, vernis noir, finition ENIG</dd>
+          <dt>Outils</dt>
+          <dd>KiCad 10, Python, fabrication et assemblage JLCPCB</dd>
+          <dt>État</dt>
+          <dd>5 cartes assemblées commandées, mesures à venir</dd>
+          <dt>Liens</dt>
+          <dd><a href="https://github.com/PierreHlr/nfc-business-card" target="_blank" rel="noopener">Fichiers KiCad et calculs (GitHub)</a></dd>
+        </dl>
+      </aside>
+
+      <!-- ===================== DESCRIPTION ===================== -->
+      <article class="prose">
+
+        <h2>Cahier des charges</h2>
+        <p>
+          Le but : qu'une personne arrive sur mon portfolio en approchant simplement son téléphone
+          de la carte. J'ai fixé les exigences avant de dessiner quoi que ce soit :
+        </p>
+        <ul>
+          <li>fonctionnement 100&nbsp;% passif : ni pile, ni alimentation, ni microcontrôleur ;</li>
+          <li>lecture par les téléphones NFC courants (iPhone XS et plus récents, Android), sans application ;</li>
+          <li>distance de lecture d'au moins 2&nbsp;cm, 3&nbsp;cm visés ;</li>
+          <li>contenu protégé contre la réécriture ;</li>
+          <li>un QR code de secours pour les téléphones sans NFC ;</li>
+          <li>le format d'une carte bancaire, pour tenir dans un portefeuille.</li>
+        </ul>
+
+        <h2>Principe : un transformateur à 13,56&nbsp;MHz</h2>
+        <p>
+          À 13,56&nbsp;MHz, la longueur d'onde est de 22&nbsp;m. Un téléphone posé à quelques centimètres
+          est donc en plein champ proche : rien n'est vraiment « rayonné ». La bobine du téléphone
+          et l'antenne de la carte se comportent comme le primaire et le secondaire d'un transformateur
+          à air, faiblement couplés.
+        </p>
+        <ul>
+          <li><strong>Énergie</strong> : le champ du téléphone induit une tension dans l'antenne
+            (loi de Faraday). La puce la redresse pour s'alimenter.</li>
+          <li><strong>Réponse</strong> : la puce fait varier sa propre charge. Le téléphone perçoit
+            cette variation à travers l'inductance mutuelle, et la décode.</li>
+        </ul>
+        <p>
+          Au champ minimal prévu par la norme ISO/IEC 14443 (1,5&nbsp;A/m), l'antenne de la carte
+          ne fournit que 2,0&nbsp;V efficaces à vide. C'est la résonance du circuit qui multiplie
+          cette tension : tout le projet repose donc sur le dimensionnement de l'antenne.
+        </p>
+
+        <h2>Choix de la puce</h2>
+        <p>
+          Le premier candidat, la NXP NTAG213, n'est vendu qu'en wafer ou en module pour les fabricants
+          de cartes : impossible à faire souder par un assembleur de PCB. Sa variante NTAG213F a la même
+          mémoire (144&nbsp;octets) et la même capacité d'entrée (50&nbsp;pF), mais existe en boîtier
+          soudable HXSON4 de 2,0 × 1,5&nbsp;mm, disponible chez JLCPCB.
+        </p>
+        <p>
+          Le « F » ajoute une sortie de détection de champ (FD), prévue pour réveiller un microcontrôleur.
+          Sans microcontrôleur, la datasheet impose deux précautions :
+        </p>
+        <ul>
+          <li>FD ne doit pas rester en l'air : elle est reliée à la masse de la puce. En contrepartie,
+            le mode veille (<code>SLEEP_EN</code>) ne doit jamais être activé à la programmation,
+            sinon la carte deviendrait invisible ;</li>
+          <li>le pad central reste non connecté : il n'est soudé que pour la tenue mécanique.</li>
+        </ul>
+
+        <h2>Schéma</h2>
+        <p>
+          Le schéma tient en trois éléments : l'antenne, la puce, et deux emplacements de condensateurs
+          d'accord laissés vides à la fabrication.
+        </p>
+        <figure class="figure-svg">
+          <svg viewBox="0 0 720 300" role="img" aria-labelledby="schema-titre">
+            <title id="schema-titre">Schéma : l'antenne AE1, les condensateurs C1 et C2 non montés et la puce U1 sont en parallèle entre les nœuds LB et LA ; FD est reliée à GND et le pad central EP n'est pas connecté.</title>
+            <!-- Rails LB (haut) et LA (bas), qui relient les trois composants en parallèle -->
+            <path class="fil" d="M100,100 V60 H500 M100,200 V240 H500"/>
+            <text class="t-aide" x="160" y="50">LB</text>
+            <text class="t-aide" x="160" y="264">LA</text>
+            <!-- AE1 : l'antenne, une bobine en cuivre -->
+            <path class="cuivre" d="M100,100 a12.5,12.5 0 0 1 0,25 a12.5,12.5 0 0 1 0,25 a12.5,12.5 0 0 1 0,25 a12.5,12.5 0 0 1 0,25"/>
+            <text class="t-ref" x="128" y="136">AE1</text>
+            <text class="t-aide" x="128" y="156">antenne</text>
+            <text class="t-aide" x="128" y="176">2,24 µH</text>
+            <!-- C1 et C2 : condensateurs d'accord, non montés (DNP) -->
+            <path class="fil dnp" d="M240,60 V142 M222,142 H258 M222,158 H258 M240,158 V240"/>
+            <text class="t-ref" x="268" y="146">C1</text>
+            <text class="t-aide" x="268" y="166">DNP</text>
+            <path class="fil dnp" d="M350,60 V142 M332,142 H368 M332,158 H368 M350,158 V240"/>
+            <text class="t-ref" x="378" y="146">C2</text>
+            <text class="t-aide" x="378" y="166">DNP</text>
+            <circle class="noeud" cx="240" cy="60" r="4"/>
+            <circle class="noeud" cx="240" cy="240" r="4"/>
+            <circle class="noeud" cx="350" cy="60" r="4"/>
+            <circle class="noeud" cx="350" cy="240" r="4"/>
+            <!-- U1 : la puce NTAG213F et ses broches -->
+            <rect class="fil" x="500" y="30" width="140" height="240"/>
+            <text class="t-aide" x="484" y="52" text-anchor="middle">2</text>
+            <text class="t-aide" x="484" y="232" text-anchor="middle">4</text>
+            <text x="510" y="65">LB</text>
+            <text x="510" y="245">LA</text>
+            <text class="t-ref" x="570" y="140" text-anchor="middle">U1</text>
+            <text class="t-aide" x="570" y="162" text-anchor="middle">NTAG213F</text>
+            <path class="fil" d="M640,100 H670 M640,160 H670 M640,220 H670"/>
+            <text x="630" y="105" text-anchor="end">GND</text>
+            <text x="630" y="165" text-anchor="end">FD</text>
+            <text x="630" y="225" text-anchor="end">EP</text>
+            <text class="t-aide" x="655" y="92" text-anchor="middle">1</text>
+            <text class="t-aide" x="655" y="152" text-anchor="middle">3</text>
+            <text class="t-aide" x="655" y="212" text-anchor="middle">5</text>
+            <!-- FD reliée à GND ; EP non connecté (croix) -->
+            <path class="fil" d="M670,100 H690 V160 H670"/>
+            <path class="fil" d="M664,214 L676,226 M676,214 L664,226"/>
+          </svg>
+          <figcaption>Schéma de la carte. C1 et C2 (0603, C0G) ne sont pas posés par l'assembleur (DNP) : ils servent à l'accord et sont soudés à la main.</figcaption>
+        </figure>
+
+        <h2>Dimensionnement de l'antenne</h2>
+        <p>
+          L'antenne et la capacité d'entrée de la puce forment un circuit LC parallèle.
+          La tension reçue par la puce est maximale quand ce circuit résonne à la fréquence
+          de la porteuse :
+        </p>
+<pre><code><i>f</i><sub>0</sub> = 1 / (2π·√(<i>L</i>·<i>C</i><sub>tot</sub>))
+<i>C</i><sub>tot</sub> = <i>C</i><sub>puce</sub> + <i>C</i><sub>parasite</sub> + <i>C</i><sub>accord</sub></code></pre>
+        <p>
+          J'ai visé une résonance <strong>un peu au-dessus</strong> de 13,56&nbsp;MHz, entre 14 et 15&nbsp;MHz,
+          pour deux raisons. Un condensateur d'accord ne peut qu'ajouter de la capacité, donc seulement
+          faire descendre la fréquence : une antenne trop haute se corrige, une antenne trop basse oblige
+          à refaire le PCB. Et le téléphone lui-même désaccorde la carte, différemment selon le modèle :
+          le meilleur réglage se trouve par la mesure. Avec les 50&nbsp;pF de la puce, cela demande
+          une inductance de 2,1 à 2,6&nbsp;µH.
+        </p>
+        <p>
+          L'antenne fait le tour de la carte (80 × 48&nbsp;mm), comme celle d'une carte bancaire
+          sans contact, que tous les téléphones savent lire. Aucune surface de cuivre à l'intérieur :
+          elle serait parcourue par des courants de Foucault qui s'opposent au champ.
+        </p>
+
+        <h2>Deux calculs indépendants</h2>
+        <p>
+          Sans analyseur de réseau, impossible de mesurer l'inductance avant de commander.
+          Pour pouvoir faire confiance au calcul, je l'ai mené par deux méthodes qui ne partagent
+          aucune hypothèse, et je n'ai retenu une géométrie que si elles concordaient :
+        </p>
+        <ul>
+          <li><strong>Méthode de Greenhouse</strong> : la spirale est découpée en ses 16 segments droits.
+            L'inductance totale est la somme des inductances propres de chaque segment et des inductances
+            mutuelles de chaque paire de segments parallèles, obtenues en intégrant exactement la formule
+            de Neumann. Le code a été validé sur une boucle carrée de 50&nbsp;mm : 210,6&nbsp;nH, contre
+            210,5&nbsp;nH pour la formule analytique.</li>
+          <li><strong>Formule empirique</strong> des antennes imprimées, issue de la note d'application
+            AN2972 de STMicroelectronics.</li>
+        </ul>
+        <figure>
+<pre><code><span class="c-keyword">def</span> _g(u, d):
+    <span class="c-keyword">return</span> u * math.asinh(u / d) - math.sqrt(u * u + d * d)
+
+
+<span class="c-keyword">def</span> mutual_parallel(a1, b1, a2, b2, d):
+    <span class="c-comment">"""Exact mutual inductance of two parallel filaments.
+
+    Filament 1 spans [a1, b1], filament 2 spans [a2, b2] along the same axis,
+    distance d apart. Obtained by integrating the Neumann formula.
+    """</span>
+    <span class="c-keyword">return</span> MU0 / (4 * math.pi) * (
+        _g(b1 - a2, d) - _g(a1 - a2, d) - _g(b1 - b2, d) + _g(a1 - b2, d)
+    )</code></pre>
+          <figcaption>Inductance mutuelle de deux segments parallèles, extrait de <code>calc/antenna.py</code> (Python, sans bibliothèque externe).</figcaption>
+        </figure>
+        <p>Les deux méthodes ont ensuite servi à choisir le nombre de spires et la largeur de piste :</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Spires</th><th>Piste</th><th><i>L</i> Greenhouse</th><th><i>L</i> empirique</th><th>Résonance sans accord</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">1,0&nbsp;mm</td><td class="num">1,44&nbsp;µH</td><td class="num">1,34&nbsp;µH</td><td class="num">18,3&nbsp;MHz</td></tr>
+              <tr><td class="num">4</td><td class="num">0,5&nbsp;mm</td><td class="num">2,70&nbsp;µH</td><td class="num">2,67&nbsp;µH</td><td class="num">13,4&nbsp;MHz</td></tr>
+              <tr><td class="num">4</td><td class="num">0,8&nbsp;mm</td><td class="num">2,40&nbsp;µH</td><td class="num">2,35&nbsp;µH</td><td class="num">14,2&nbsp;MHz</td></tr>
+              <tr><td class="num ok">4</td><td class="num ok">1,0&nbsp;mm</td><td class="num ok">2,24&nbsp;µH</td><td class="num ok">2,18&nbsp;µH</td><td class="num ok">14,7&nbsp;MHz</td></tr>
+              <tr><td class="num">5</td><td class="num">1,0&nbsp;mm</td><td class="num">3,11&nbsp;µH</td><td class="num">3,15&nbsp;µH</td><td class="num">12,5&nbsp;MHz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Avec 3 spires, la résonance est bien trop haute. Avec 5, ou avec des pistes de 0,5&nbsp;mm,
+          elle tombe déjà sous la porteuse, et aucun condensateur ne pourrait la remonter.
+          4 spires de 1,0&nbsp;mm arrivent dans la fenêtre visée avec les pistes les plus larges,
+          donc la résistance la plus faible. Les deux méthodes concordent à 2,5&nbsp;% près :
+          je retiens <i>L</i> = 2,24&nbsp;µH.
+        </p>
+        <p>
+          La largeur de piste compte vraiment : à 13,56&nbsp;MHz, l'effet de peau confine le courant
+          sur environ 18&nbsp;µm de profondeur, la moitié de l'épaisseur du cuivre. Une première version
+          de l'empreinte avait des pistes de 0,2&nbsp;mm : cinq fois plus de résistance (2,3&nbsp;Ω en
+          continu) et une résonance déjà à 14,0&nbsp;MHz, sans presque plus de marge pour l'accord.
+          Avec 1,0&nbsp;mm, la résistance n'est plus que de 0,72&nbsp;Ω à 13,56&nbsp;MHz, pour un facteur
+          de qualité à vide d'environ 265.
+        </p>
+
+        <h2>Accord sans analyseur de réseau</h2>
+        <p>
+          Avec <i>L</i> = 2,24&nbsp;µH et 52,5&nbsp;pF au total (50&nbsp;pF pour la puce, environ 2,5&nbsp;pF
+          de capacités parasites entre les spires et sur les pastilles), la carte résonne à 14,7&nbsp;MHz
+          sans condensateur. Il faut environ 9&nbsp;pF de plus pour descendre à 13,56&nbsp;MHz.
+        </p>
+        <figure class="figure-svg">
+          <svg viewBox="0 0 720 380" role="img" aria-labelledby="accord-titre">
+            <title id="accord-titre">Fréquence de résonance en fonction de la capacité d'accord : 14,7 MHz sans condensateur, 13,56 MHz atteint vers 9 pF, 12,9 MHz à 15 pF.</title>
+            <!-- Grille et axes (échelle : 41,7 px par pF, 115,4 px par MHz) -->
+            <path class="grille" d="M64,262.3 H690 M64,204.6 H690 M64,146.9 H690 M64,89.2 H690 M64,31.5 H690"/>
+            <path class="axe" d="M64,320 H690 M64,320 v5 M189.2,320 v5 M314.4,320 v5 M439.6,320 v5 M564.8,320 v5 M690,320 v5"/>
+            <g class="t-aide" text-anchor="end">
+              <text x="56" y="324">12,5</text><text x="56" y="266.3">13,0</text><text x="56" y="208.6">13,5</text>
+              <text x="56" y="150.9">14,0</text><text x="56" y="93.2">14,5</text><text x="56" y="35.5">15,0</text>
+            </g>
+            <g class="t-aide" text-anchor="middle">
+              <text x="64" y="342">0</text><text x="189.2" y="342">3</text><text x="314.4" y="342">6</text>
+              <text x="439.6" y="342">9</text><text x="564.8" y="342">12</text><text x="690" y="342">15</text>
+              <text x="377" y="370">Capacité d'accord ajoutée C1 + C2 (pF)</text>
+            </g>
+            <text class="t-aide" x="8" y="14">Fréquence de résonance (MHz)</text>
+            <!-- Zone teintée : effet d'une erreur de ±5 % sur L -->
+            <path class="bande" d="M64,24.9 L84.9,33.1 L105.7,41.2 L126.6,49.2 L147.5,57.1 L168.3,64.8 L189.2,72.5 L210.1,80.1 L230.9,87.5 L251.8,94.9 L272.7,102.2 L293.5,109.3 L314.4,116.4 L335.3,123.4 L356.1,130.3 L377,137.1 L397.9,143.8 L418.7,150.5 L439.6,157.1 L460.5,163.5 L481.3,169.9 L502.2,176.3 L523.1,182.5 L543.9,188.7 L564.8,194.8 L585.7,200.9 L606.5,206.8 L627.4,212.7 L648.3,218.6 L669.1,224.3 L690,230.1 L690,304.8 L669.1,299.4 L648.3,293.9 L627.4,288.4 L606.5,282.8 L585.7,277.1 L564.8,271.3 L543.9,265.5 L523.1,259.6 L502.2,253.7 L481.3,247.7 L460.5,241.6 L439.6,235.4 L418.7,229.2 L397.9,222.8 L377,216.4 L356.1,210 L335.3,203.4 L314.4,196.7 L293.5,190 L272.7,183.2 L251.8,176.3 L230.9,169.3 L210.1,162.2 L189.2,155 L168.3,147.7 L147.5,140.3 L126.6,132.8 L105.7,125.2 L84.9,117.5 L64,109.7 Z"/>
+            <!-- Porteuse NFC à 13,56 MHz et point d'accord (≈ 9 pF) -->
+            <path class="repere" d="M64,197.7 H690 M439.6,203.7 V320"/>
+            <circle class="repere" cx="439.6" cy="197.7" r="6"/>
+            <text x="72" y="218">13,56 MHz · porteuse NFC</text>
+            <text x="448" y="312">≈ 9 pF</text>
+            <!-- f0 = 1 / (2π √(L (52,5 pF + C))), L = 2,24 µH -->
+            <path class="courbe" d="M64,68.9 L84.9,76.9 L105.7,84.8 L126.6,92.6 L147.5,100.3 L168.3,107.8 L189.2,115.3 L210.1,122.7 L230.9,129.9 L251.8,137.1 L272.7,144.2 L293.5,151.2 L314.4,158.1 L335.3,164.9 L356.1,171.6 L377,178.3 L397.9,184.8 L418.7,191.3 L439.6,197.7 L460.5,204 L481.3,210.3 L502.2,216.4 L523.1,222.5 L543.9,228.6 L564.8,234.5 L585.7,240.4 L606.5,246.2 L627.4,252 L648.3,257.7 L669.1,263.3 L690,268.9"/>
+            <text x="78" y="58">14,7 MHz sans condensateur</text>
+            <!-- Valeurs normalisées de condensateurs (le survol affiche la valeur) -->
+            <g class="mesure"><title>0 pF → 14,67 MHz</title><circle class="zone" cx="64" cy="68.9" r="12"/><circle class="point" cx="64" cy="68.9" r="4.5"/></g>
+            <g class="mesure"><title>2,2 pF → 14,38 MHz</title><circle class="zone" cx="155.8" cy="103.3" r="12"/><circle class="point" cx="155.8" cy="103.3" r="4.5"/></g>
+            <g class="mesure"><title>3,3 pF → 14,23 MHz</title><circle class="zone" cx="201.7" cy="119.7" r="12"/><circle class="point" cx="201.7" cy="119.7" r="4.5"/></g>
+            <g class="mesure"><title>4,7 pF → 14,06 MHz</title><circle class="zone" cx="260.1" cy="140" r="12"/><circle class="point" cx="260.1" cy="140" r="4.5"/></g>
+            <g class="mesure"><title>6,8 pF → 13,81 MHz</title><circle class="zone" cx="347.8" cy="168.9" r="12"/><circle class="point" cx="347.8" cy="168.9" r="4.5"/></g>
+            <g class="mesure"><title>8,2 pF → 13,65 MHz</title><circle class="zone" cx="406.2" cy="187.4" r="12"/><circle class="point" cx="406.2" cy="187.4" r="4.5"/></g>
+            <g class="mesure"><title>10 pF → 13,45 MHz</title><circle class="zone" cx="481.3" cy="210.3" r="12"/><circle class="point" cx="481.3" cy="210.3" r="4.5"/></g>
+            <g class="mesure"><title>12 pF → 13,24 MHz</title><circle class="zone" cx="564.8" cy="234.5" r="12"/><circle class="point" cx="564.8" cy="234.5" r="4.5"/></g>
+            <g class="mesure"><title>15 pF → 12,94 MHz</title><circle class="zone" cx="690" cy="268.9" r="12"/><circle class="point" cx="690" cy="268.9" r="4.5"/></g>
+          </svg>
+          <figcaption>Fréquence de résonance selon la capacité d'accord ajoutée. Les points sont les valeurs normalisées de condensateurs ; la zone teintée montre l'effet d'une erreur de ±5&nbsp;% sur l'inductance.</figcaption>
+        </figure>
+        <p>
+          Une erreur de 5&nbsp;% sur <i>L</i> ou sur la capacité de la puce déplace la résonance
+          à vide entre 14,3 et 15,1&nbsp;MHz : dans tous les cas, la carte reste au-dessus de la porteuse
+          et peut être accordée vers le bas.
+        </p>
+        <p>
+          Faute d'analyseur de réseau, la résonance elle-même ne se mesure pas. Ce qui compte pour
+          l'utilisateur, en revanche, se mesure avec un téléphone et une règle : la distance de lecture
+          maximale. La carte a donc deux emplacements 0603 en parallèle sur l'antenne, vides à la fabrication.
+          Chacun des cinq prototypes recevra une valeur différente, et celle qui lit le plus loin,
+          sur plusieurs téléphones, sera retenue :
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Prototype</th><th>C1 + C2</th><th>Résonance calculée</th><th>Distance de lecture</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0</td><td class="num">14,67&nbsp;MHz</td><td>À mesurer</td></tr>
+              <tr><td class="num">2</td><td class="num">3,3&nbsp;pF</td><td class="num">14,23&nbsp;MHz</td><td>À mesurer</td></tr>
+              <tr><td class="num">3</td><td class="num">6,8&nbsp;pF</td><td class="num">13,81&nbsp;MHz</td><td>À mesurer</td></tr>
+              <tr><td class="num">4</td><td class="num">8,2&nbsp;pF</td><td class="num">13,65&nbsp;MHz</td><td>À mesurer</td></tr>
+              <tr><td class="num">5</td><td class="num">10&nbsp;pF</td><td class="num">13,45&nbsp;MHz</td><td>À mesurer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Routage et fabrication</h2>
+        <p>
+          Pour KiCad, une bobine pose problème : en continu, c'est un court-circuit entre ses deux
+          extrémités, donc une erreur au contrôle des règles de conception (DRC) si elle est tracée
+          en pistes. L'antenne est donc une empreinte à part, dessinée avec 16 lignes de cuivre et déclarée
+          comme <i>net tie</i> : KiCad sait alors que ce court-circuit est voulu.
+        </p>
+        <ul>
+          <li>l'extrémité extérieure de la spirale revient vers l'intérieur par un pont sur la face arrière,
+            sous les quatre spires ;</li>
+          <li>la puce est tournée de 180° et les condensateurs de 90° : toutes les bornes LB se retrouvent
+            en haut, toutes les bornes LA en bas, et le routage se réduit à deux rails parallèles ;</li>
+          <li>ni plan de masse ni surface de cuivre : rien ne doit gêner le champ à l'intérieur de la boucle.</li>
+        </ul>
+        <div class="figure-row">
+          <figure>
+            <img src="../assets/img/projets/carte-nfc/recto.jpg" width="1200" height="788" loading="lazy"
+                 alt="Recto de la carte : « Pierre HILAIREAU », « Embedded systems student » et adresse e-mail en blanc sur fond noir">
+            <figcaption>Recto : nom, titre et e-mail en sérigraphie blanche.</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/img/projets/carte-nfc/verso.jpg" width="1200" height="788" loading="lazy"
+                 alt="Verso de la carte : QR code au centre, puce et condensateurs à gauche, quatre spires d'antenne sur le pourtour">
+            <figcaption>Verso : QR code, puce et emplacements d'accord ; les spires se devinent sous le vernis.</figcaption>
+          </figure>
+        </div>
+        <p>
+          Les cartes sont fabriquées et assemblées par JLCPCB : FR-4 de 0,8&nbsp;mm, vernis noir,
+          sérigraphie blanche et finition ENIG (dorée), qui donne aussi des pastilles bien planes pour
+          les broches de 0,25&nbsp;mm de la puce. Seule la puce est posée par l'assembleur ;
+          les condensateurs d'accord seront soudés à la main.
+        </p>
+
+        <h2>Données et QR code</h2>
+        <p>
+          Le téléphone ouvre le lien grâce à un enregistrement NDEF de type URI. Le préfixe
+          <code>https://</code> n'y est pas stocké en texte mais codé sur un seul octet :
+          le message complet tient en 28&nbsp;octets, soit 19&nbsp;% des 144&nbsp;octets de la puce.
+        </p>
+        <p>
+          Le QR code de secours contient la même adresse, écrite en majuscules
+          (<code>HTTPS://PIERREHLR.GITHUB.IO/</code>). Le protocole et le nom de domaine ne sont pas
+          sensibles à la casse, et les majuscules permettent le mode alphanumérique : 11&nbsp;bits pour
+          deux caractères au lieu de 16. Le code tient alors en 25 × 25 modules au lieu de 29 × 29 ;
+          sur 17,5&nbsp;mm de côté, chaque module mesure 0,70&nbsp;mm, bien au-dessus de la résolution
+          de la sérigraphie. Il est imprimé en négatif (la sérigraphie blanche forme le fond, le vernis noir
+          les modules) : sinon, le code apparaîtrait inversé et beaucoup de lecteurs le refuseraient.
+        </p>
+
+        <h2>Suite du projet</h2>
+        <p>Les cinq cartes assemblées sont commandées. Les prochaines étapes :</p>
+        <ul>
+          <li>mesurer la distance de lecture sans accord, avec plusieurs téléphones (iPhone et Android) ;</li>
+          <li>essayer les valeurs de condensateur sur les cinq prototypes, et garder celle qui donne
+            la meilleure distance dans le pire cas ;</li>
+          <li>écrire l'URL avec NXP TagWriter, vérifier le message avec NXP TagInfo, puis verrouiller
+            la puce en écriture.</li>
+        </ul>
+        <p>Les distances mesurées compléteront le tableau d'accord ci-dessus.</p>
+
+        <div class="project-end">
+          <a class="back-link" href="../index.html#projets">← Retour aux projets</a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="pixel pixel-xs pixel-footer" data-pose="repos" aria-hidden="true"></span>
+    <div class="container footer-inner">
+      <span>© <span data-annee>2026</span> Pierre Hilaireau</span>
+      <span>Fait main · hébergé sur GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>

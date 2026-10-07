@@ -8,14 +8,15 @@ Destiné à être publié gratuitement sur **GitHub Pages** : `https://pierrehlr
 ```
 index.html                 Page d'accueil : présentation, projets, compétences, parcours, contact
 projets/
-  ecepilot.html            Pages des projets
+  carte-nfc.html           Pages des projets
+  ecepilot.html
   neural-speech.html
   double-pendule.html
   _modele-projet.html      Modèle de page projet, à copier pour chaque nouveau projet
                            (le « _ » au début du nom empêche GitHub Pages de le publier)
 en/                        Version anglaise (mêmes images, styles et scripts que la version française)
   index.html
-  projects/ecepilot.html, neural-speech.html, double-pendulum.html
+  projects/nfc-business-card.html, ecepilot.html, neural-speech.html, double-pendulum.html
 css/style.css              Mise en page et couleurs (thème clair et sombre)
 js/main.js                 Thème, LED de l'accueil, personnage pixel art, prénom en ASCII
 assets/

@@ -776,6 +776,30 @@ td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 }
 .chain span { display: block; margin-top: 4px; font-size: 14px; line-height: 1.35; color: var(--muted); }
 
+/* Schéma et graphique dessinés en SVG dans la page (page Carte NFC) :
+   ils prennent les couleurs du thème, y compris avec le bouton clair / sombre */
+.figure-svg svg {
+  display: block; width: 100%; height: auto;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  font-family: var(--font-mono);
+}
+.figure-svg text { fill: var(--ink); font-size: 14px; }
+.figure-svg .t-aide { fill: var(--helper); font-size: 13px; }
+.figure-svg .t-ref { font-weight: 800; }
+.figure-svg .fil { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.figure-svg .dnp { stroke: var(--helper); }
+.figure-svg .cuivre { fill: none; stroke: var(--c-orange); stroke-width: 3; stroke-linecap: round; }
+.figure-svg .noeud { fill: var(--ink); }
+.figure-svg .grille { stroke: var(--line-soft); stroke-width: 1; }
+.figure-svg .axe { stroke: var(--ink); stroke-width: 1.5; }
+.figure-svg .repere { fill: none; stroke: var(--ink); stroke-width: 1; }
+.figure-svg .bande { fill: var(--c-blue); opacity: 0.14; }
+.figure-svg .courbe { fill: none; stroke: var(--c-blue); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.figure-svg .point { fill: var(--c-blue); stroke: var(--paper); stroke-width: 2; }
+.figure-svg .zone { fill: transparent; }   /* zone de survol plus grande que le point */
+.figure-svg .mesure:hover .point { fill: var(--c-red); }
+
 /* ---------- Animations réduites si l'utilisateur le demande ---------- */
 
 @media (prefers-reduced-motion: reduce) {
